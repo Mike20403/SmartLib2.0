@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "499803935485",
+    "firebase_url": "https://smartlib-c11dc.firebaseio.com",
+    "project_id": "smartlib-c11dc",
+    "storage_bucket": "smartlib-c11dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:499803935485:android:1954bba3eedc76c9dea494",
+        "android_client_info": {
+          "package_name": "com.app.smartlibhost"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "499803935485-gcfcicfp6almkasjqje99djgdmg8s6bf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.smartlibhost",
+            "certificate_hash": "18c3f18f0ef9a97434d8b541bbc7cbddab39d985"
+          }
+        },
+        {
+          "client_id": "499803935485-mm2ggj393hvjjhqttsshvq5rls8aomam.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwT_5ECwQQ3RqVufBsxZz8bjwXaDdsxi8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "499803935485-mm2ggj393hvjjhqttsshvq5rls8aomam.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:overScrollMode="always"
+    android:layout_height="900dp"
+
+    android:id="@+id/scrollView"
+   >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="900dp"
+        android:paddingBottom="100dp"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
+        android:background="#FFFFFF">
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="140dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView9">
+
+            <ImageView
+                android:id="@+id/upload_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/grid_shape"
+                android:paddingHorizontal="3dp"
+                app:srcCompat="@drawable/pictures">
+
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="end|bottom"
+                android:layout_marginBottom="30dp"
+                app:srcCompat="@drawable/plus" />
+
+
+        </FrameLayout>
+
+        <EditText
+            android:id="@+id/edttacgia"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/grid_table"
+            android:ems="10"
+            android:maxLines="5"
+            android:focusable="true"
+            android:hint="Nhập tên tác giả"
+            android:inputType="textMultiLine"
+            android:paddingLeft="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline5"
+            app:layout_constraintStart_toEndOf="@+id/frameLayout"
+            app:layout_constraintTop_toBottomOf="@+id/edttensach"
+            app:layout_constraintVertical_bias="0.017" />
+
+        <EditText
+            android:id="@+id/edtbarcode"
+            android:layout_width="160dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/grid_table"
+            android:ems="10"
+            android:maxLines="1"
+            android:focusable="true"
+            android:inputType="number"
+            android:maxLength="13"
+            android:paddingLeft="10dp"
+            app:layout_constraintStart_toEndOf="@+id/barcode"
+            app:layout_constraintTop_toBottomOf="@+id/spinnernn" />
+
+
+        <EditText
+            android:id="@+id/edttensach"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/grid_table"
+            android:ems="10"
+            android:maxLines="3"
+            android:focusable="true"
+            android:gravity="start|top"
+            android:hint="Nhập tên sách"
+            android:inputType="textMultiLine"
+            android:paddingLeft="10dp"
+            app:layout_constraintStart_toEndOf="@+id/frameLayout"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Biểu mẫu nhập mới đầu sách"
+            android:textColor="#AD1457"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.514"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/primaryDarkColor"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="292dp" />
+
+        <View
+            android:id="@+id/line4"
+            style="@style/Divider"
+
+            android:background="@color/primaryDarkColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Giới thiệu"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+        <Spinner
+            android:id="@+id/spinnernn"
+            android:layout_width="114dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toEndOf="@+id/textView13"
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Ngôn ngữ:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+        <TextView
+            android:id="@+id/barcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Mã kiểm soát:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+        <ImageView
+            android:id="@+id/scanbt"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="72dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toEndOf="@+id/edtbarcode"
+            app:layout_constraintTop_toBottomOf="@+id/spinnernn"
+            app:srcCompat="@drawable/barcode" />
+
+        <TextView
+            android:id="@+id/tvtheloai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Thể loại"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barcode" />
+
+        <EditText
+            android:id="@+id/edtnxb"
+            android:layout_width="200dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/grid_table"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Nhập NXB"
+            android:maxLines="1"
+            android:focusable="true"
+            android:inputType="textMultiLine"
+            android:paddingLeft="7dp"
+            app:layout_constraintStart_toEndOf="@+id/nxb"
+            app:layout_constraintTop_toBottomOf="@+id/spinnertheloai" />
+
+        <EditText
+            android:id="@+id/edtsoluong"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/grid_table"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint=""
+            android:maxLines="1"
+            android:maxLength="3"
+            android:inputType="textMultiLine"
+            android:paddingLeft="10dp"
+            app:layout_constraintStart_toEndOf="@+id/soluong"
+            app:layout_constraintTop_toTopOf="@+id/soluong" />
+
+        <TextView
+            android:id="@+id/soluong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Số lượng:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nxb" />
+
+        <Spinner
+            android:id="@+id/spinnertheloai"
+            android:layout_width="200dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:spinnerMode="dropdown"
+            app:layout_constraintStart_toEndOf="@+id/tvtheloai"
+            app:layout_constraintTop_toBottomOf="@+id/barcode" />
+
+        <TextView
+            android:id="@+id/nxb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Nhả xuất bản:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvtheloai" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="518dp" />
+        <View
+            android:id="@+id/line5"
+            style="@style/Divider"
+
+            android:background="@color/primaryDarkColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline6" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Mô tả"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline6" />
+
+        <EditText
+            android:id="@+id/edtmota"
+            android:layout_width="320dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="4dp"
+            android:gravity="top"
+            android:paddingLeft="10dp"
+            android:focusable="true"
+            android:outlineSpotShadowColor="@color/primaryDarkColor"
+            android:background="@drawable/grid_table"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.441"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+        <Button
+            android:id="@+id/addnow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Thêm"
+            android:backgroundTint="@color/primaryDarkColor"
+            android:background="@drawable/grid_shape"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtmota"
+            app:layout_constraintVertical_bias="0.257" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</ScrollView>

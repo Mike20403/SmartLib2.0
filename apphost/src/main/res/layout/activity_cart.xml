@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.CartActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/mauapp"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="Túi đồ của bạn" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
+        <ImageView
+            android:id="@+id/emptyimg"
+            android:layout_width="230dp"
+            android:layout_height="230dp"
+            android:visibility="invisible"
+            android:layout_marginBottom="80dp"
+            android:src="@drawable/bookcart"
+            android:layout_gravity="center">
+
+        </ImageView>
+        <TextView
+            android:id="@+id/emptytext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_marginBottom="200dp"
+            android:layout_gravity="bottom|center"
+            android:layout_column="0"
+            android:textSize="18dp"
+            android:visibility="invisible"
+            android:text="Túi đồ của bạn đang trống" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cartrv"
+            android:layout_width="match_parent"
+            android:padding="7dp"
+            android:layout_height="match_parent"
+            android:layout_row="0"
+            android:layout_column="0">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+
+
+    </GridLayout>
+
+    <Button
+        android:id="@+id/borrownow"
+        android:layout_width="136dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/mauapp"
+        android:gravity="center"
+        android:text="Mượn ngay"
+
+        android:textColor="#FFFFFF"
+        android:textSize="12dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

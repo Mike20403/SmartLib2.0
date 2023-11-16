@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/detail"
+        android:title="Chi tiết đơn mượn"
+        ></item>
+    <item
+        android:id="@+id/payback"
+        android:title="Đã trả"
+        >
+
+    </item>
+
+
+    <item
+        android:id="@+id/borrowed"
+        android:title="Hoàn tất mượn"
+        >
+
+    </item>
+    <item
+        android:id="@+id/ready"
+        android:title="Sẵn sàng"
+        >
+
+    </item>
+    <item
+        android:id="@+id/verified"
+        android:title="Xác nhận đơn mượn"
+        >
+
+    </item>
+
+    <item
+        android:id="@+id/cancel"
+        android:title="Hủy bỏ đơn mượn"
+        >
+
+    </item>
+
+
+</menu>

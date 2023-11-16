@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:paddingHorizontal="8dp"
+    android:layout_height="match_parent"
+    tools:context=".WebFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:padding="5dp"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:background="#fff"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-condensed"
+        android:id="@+id/title"
+        android:text="Hello World"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <WebView
+        android:layout_below="@+id/title"
+        android:id="@+id/web"
+
+        android:layout_marginBottom="22dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+    <TextView
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:background="#fff"
+        android:padding="3dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/page_no"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Page : 20"
+        android:textSize="12sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

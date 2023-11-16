@@ -1,0 +1,125 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+    id 'com.jakewharton.butterknife'
+}
+
+android {
+    namespace 'com.app.smartlibhost'
+    compileSdkVersion 34
+    defaultConfig {
+        applicationId 'com.app.smartlibhost'
+        minSdkVersion 24
+        targetSdkVersion 34
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+configurations {
+    cleanedAnnotations
+    implementation.exclude group: 'org.jetbrains' , module:'annotations'
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //noinspection GradleCompatible
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.annotation:annotation:1.7.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
+    implementation 'com.facebook.android:facebook-android-sdk:16.2.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.android.volley:volley:1.2.1'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+    implementation 'com.google.android.material:material:1.10.0'
+    implementation 'com.google.android.gms:play-services-maps:18.2.0'
+
+    api 'com.google.android.gms:play-services-vision:20.1.3'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+    implementation 'ir.sohreco.androidfilechooser:android-file-chooser:1.3'
+    implementation 'com.ss.bannerslider:bannerslider:2.0.0'
+    implementation 'me.everything:overscroll-decor-android:1.0.4'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.github.chrisbanes:PhotoView:2.1.3'
+    implementation 'me.majiajie:pager-bottom-tab-strip:2.4.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'com.github.Inconnu08:android-ratingreviews:1.2.0'
+    implementation 'com.github.ome450901:SimpleRatingBar:1.4.3'
+    implementation 'com.google.android.material:material:1.10.0'
+    implementation 'com.github.andremion:counterfab:1.2.2'
+    implementation 'com.evrencoskun.library:tableview:0.8.8'
+    implementation 'com.github.open-android:Timeline:0.1.0'
+    implementation 'com.evrencoskun.library:tableview:0.8.8'
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+    implementation('com.microblink:blinkid:6.2.0@aar') {
+        transitive = true
+    }
+
+
+    // implementation 'com.folioreader:folioreader:0.4.2'
+
+    //implementation('nl.siegmann.epublib:epublib-core:3.1') {
+    //  exclude group: 'org.slf4j'
+    // exclude group: 'xmlpull'
+    // }
+    // implementation 'org.slf4j:slf4j-android:1.7.25'
+
+    //implementation 'gapp.season:bookreader:1.0.2'
+
+    implementation files('libs/epublib-core-latest.jar')
+    implementation files('libs/slf4j-android-1.6.1-RC1.jar')
+
+    implementation 'com.wajahatkarim:easyflipviewpager:2.0.1'
+    implementation 'com.agrawalsuneet.androidlibs:dotsloader:1.4'
+    // this line must be included to integrate with Firebase
+    //noinspection GradleCompatible
+    implementation 'com.google.firebase:firebase-messaging:23.3.1'
+    implementation 'com.google.firebase:firebase-core:21.1.1'
+    implementation 'com.google.firebase:firebase-auth:22.2.0'
+    implementation 'com.google.android.gms:play-services-auth:20.7.0'
+    implementation "com.google.firebase:firebase-analytics"
+    implementation "com.google.firebase:firebase-database"
+    implementation(platform('com.google.firebase:firebase-bom:32.5.0'))
+    implementation "com.google.firebase:firebase-storage"
+    // FirebaseUI for Firebase Realtime Database
+    implementation 'com.firebaseui:firebase-ui-database:8.0.2'
+
+    // FirebaseUI for Cloud Firestore
+    implementation 'com.firebaseui:firebase-ui-firestore:8.0.2'
+
+    // FirebaseUI for Firebase Auth
+    implementation 'com.firebaseui:firebase-ui-auth:8.0.2'
+
+    // FirebaseUI for Cloud Storage
+    implementation 'com.firebaseui:firebase-ui-storage:8.0.2'
+    implementation project(':barcode-reader')
+
+    implementation "com.fasterxml.jackson.core:jackson-core:2.9.7"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:2.9.7"
+    implementation "com.fasterxml.jackson.core:jackson-databind:2.9.7"
+    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.7"
+}

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/grid_shape"
+    android:columnOrderPreserved="false"
+    android:columnCount="1"
+    android:rowCount="1"
+    android:orientation="vertical"
+    android:alignmentMode="alignBounds"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+      >
+
+
+        <FrameLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            >
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="#FFFFFF"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/tensach"
+                    android:layout_width="90dp"
+                    android:layout_height="46dp"
+                    android:paddingLeft="5dp"
+                    android:textStyle="bold"
+                    android:text="Tên sách"
+                    android:textColor="#283655"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.078"
+                    app:layout_constraintStart_toEndOf="@+id/img_sach"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.048" />
+
+                <ImageView
+                    android:id="@+id/img_sach"
+                    android:layout_width="100dp"
+                    android:layout_height="140dp"
+                    android:padding="5dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+
+
+                <TextView
+                    android:id="@+id/tacgia"
+                    android:layout_width="92dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="top"
+                    android:paddingLeft="5dp"
+                    android:text="Tác giả"
+                    android:textColor="#283655"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.079"
+                    app:layout_constraintStart_toEndOf="@+id/img_sach"
+                    app:layout_constraintTop_toBottomOf="@+id/tensach"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/conlai"
+                    android:layout_width="87dp"
+                    android:layout_height="36dp"
+                    android:paddingLeft="5dp"
+
+                    android:text="Còn lại"
+                    android:textColor="#283655"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.077"
+                    app:layout_constraintStart_toEndOf="@+id/img_sach"
+                    app:layout_constraintTop_toBottomOf="@+id/tacgia"
+                    app:layout_constraintVertical_bias="0.0" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </FrameLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</GridLayout>

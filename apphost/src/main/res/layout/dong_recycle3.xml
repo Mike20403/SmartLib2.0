@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@drawable/bottom_line"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/tensach"
+                android:layout_width="164dp"
+                android:layout_height="49dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:paddingLeft="5dp"
+                android:text="Tên sách"
+                android:textColor="#283655"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/img_sach"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/img_sach"
+                android:layout_width="100dp"
+                android:layout_height="140dp"
+                android:scaleType="centerCrop"
+                android:padding="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+            <TextView
+                android:id="@+id/tacgia"
+                android:layout_width="144dp"
+                android:layout_height="54dp"
+                android:layout_gravity="top"
+                android:layout_marginStart="16dp"
+                android:paddingLeft="5dp"
+                android:text="Tác giả"
+                android:textColor="#283655"
+                android:textSize="10sp"
+                app:layout_constraintStart_toEndOf="@+id/img_sach"
+                app:layout_constraintTop_toBottomOf="@+id/tensach" />
+
+            <TextView
+                android:id="@+id/conlai"
+                android:layout_width="96dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="16dp"
+
+                android:paddingLeft="5dp"
+                android:text="Còn lại"
+                android:textColor="#283655"
+                android:textSize="10sp"
+                app:layout_constraintStart_toEndOf="@+id/img_sach"
+                app:layout_constraintTop_toBottomOf="@+id/tacgia" />
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:buttonTint="@color/primaryDarkColor"
+                android:gravity="end|right"
+                android:outlineSpotShadowColor="@color/primaryDarkColor"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/tacgia"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.423" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</RelativeLayout>

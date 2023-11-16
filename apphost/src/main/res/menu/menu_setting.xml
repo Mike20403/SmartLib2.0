@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:compat="http://schemas.android.com/tools">
+    <item
+        android:id="@+id/menuRefresh"
+        android:title="Reload"
+        android:icon="@drawable/reload24px"
+        app:actionViewClass="android.widget.ImageView"
+        app:showAsAction="always" />
+
+</menu>

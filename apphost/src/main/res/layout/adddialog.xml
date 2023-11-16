@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:text="Phiếu bổ sung thông tin"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_height="50dp">
+
+    </TextView>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayoutt"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        app:tabGravity="fill"
+     android:background="@color/selected_background_color"
+        app:tabMode="fixed"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/addPager"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_weight="1" />
+    <Button
+        android:id="@+id/dismiss"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:text="Xác nhận"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/grid_table"
+        android:backgroundTint="#AD1457"
+        android:layout_height="wrap_content">
+
+    </Button>
+
+
+</LinearLayout>

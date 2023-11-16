@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"
+    android:orientation="horizontal"
+    android:background="@drawable/grid2"
+    android:weightSum="13.5"
+   >
+
+
+        <ImageButton
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:padding="5dp"
+            android:background="@drawable/grid2"
+            app:srcCompat="@drawable/delete_2" />
+
+        <TextView
+            android:id="@+id/stt"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="@drawable/grid2"
+            android:gravity="center"
+            android:text="1"
+
+            android:textStyle="bold">
+
+        </TextView>
+
+
+        <TextView
+            android:id="@+id/tensach"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8.5"
+            android:background="@drawable/grid2"
+            android:paddingHorizontal="5dp"
+            android:text="k"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/sl"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+
+            android:background="@drawable/grid2"
+            android:gravity="center"
+            android:inputType="number"
+            android:paddingHorizontal="5dp"
+            android:maxLength="3"
+            />
+
+        <EditText
+            android:id="@+id/tinhtrang"
+            android:layout_width="25dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="@drawable/grid2"
+            android:paddingHorizontal="10dp"
+            android:text=""
+
+            />
+
+        <EditText
+            android:id="@+id/ghichu"
+            android:layout_width="80dp"
+            android:padding="5dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/grid2"
+            android:layout_weight="3"
+            android:text=""
+
+            />
+
+
+
+
+
+
+</TableRow>

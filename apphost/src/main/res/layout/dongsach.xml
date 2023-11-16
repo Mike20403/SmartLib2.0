@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:alignmentMode="alignBounds"
+    android:columnCount="1"
+    android:columnOrderPreserved="false"
+    android:orientation="vertical"
+    android:rowCount="1">
+
+
+    <ImageView
+        android:id="@+id/img_sach"
+        android:layout_width="100dp"
+        android:layout_height="140dp"
+        android:layout_row="0"
+        android:scaleType="centerCrop"
+        android:layout_column="0"
+        android:padding="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tensach"
+        android:layout_width="100dp"
+        android:layout_height="32dp"
+        android:maxLines="2"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        android:text="Tên sách"
+        android:textColor="#283655"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_sach" />
+
+    <TextView
+        android:id="@+id/tacgia"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_gravity="top"
+        android:paddingLeft="5dp"
+        android:maxLines="1"
+        android:text="Tác giả"
+        android:gravity="center"
+        android:textColor="#283655"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tensach" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/coordinator"
+    tools:context=".activity.BookDetailsActivity"
+   >
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="@drawable/mauapp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:toolbarId="@+id/detail_toolbar">
+
+            <ImageView
+                android:id="@+id/imagetoolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:contentDescription="TODO"
+                android:overScrollMode="always"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#B5FFFFFF">
+
+
+            </View>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/detail_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:theme="@style/ToolbarColoredBackArrow">
+
+
+            </androidx.appcompat.widget.Toolbar>
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/mainlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_anchorGravity="bottom"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="7dp"
+            android:paddingTop="7dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+
+            <TextView
+                android:id="@+id/mota"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="5dp"
+                android:text="Nếu chỉ còn một ngày để sống” tên sách gốc Everything, Everything là cuốn tiểu thuyết bán chạy số 1 của New York Times – đồng thời được chuyển thể thành phim điện ảnh với sự góp mặt của hai diễn viên nổi tiếng là Amandla Stenberg trong vai Maddy và Nick Robinson trong vai Olly. Ngay từ khi công chiếu, bộ phim đã gây bão tại các phòng vé trên toàn thế giới kéo theo cơn sốt tìm đọc cuốn sách đặc biệt này đến từ các fan yêu thích bộ phim.
+Một chuyện tình cảm động được kể dưới ngòi bút tràn đầy những xúc cảm khác biệt đem đến cho người đọc những rung cảm chân thật chạm đến từng ngóc ngách trong trái tim. Một cuốn sách đã khiến hàng triệu độc giả phải khóc phải cười qua từng trang giấy.
+“Nếu cuộc đời là một cuốn sách thì bạn đọc ngược từ dưới lên cũng sẽ chẳng có gì thay đổi. Hôm nay chẳng khác gì hôm qua. Ngày mai cũng giống hệt ngày hôm nay. Trong cuốn sách về cuộc đời em, chương nào cũng giống hệt chương nào, cho tới khi anh xuất hiện.”
+Đánh đổi mọi thứ... vì tình yêu. Liệu điều đó có hoàn toàn xứng đáng ?
+Điều gì sẽ xảy ra nếu bạn không thể chạm vào bất cứ thứ gì trong thế giới ngoài kia? Không bao giờ được hít thở bầu không khí trong lành, cảm nhận ánh nắng ban ngày làm bỏng rát khuôn mặt... hay thử hẹn hò và hôn lên môi cậu chàng hàng xóm? Những thứ giản đơn và ý nghĩa của cuộc sống mà bất kì ai cũng sẽ phải trải qua.
+Trong “Nếu chỉ còn một ngày để sống” , Maddy là một cô gái mắc hội chứng thiếu hụt miễn dịch tổ hợp trầm trọng, và Olly là cậu bạn nhà kế bên - cũng là mối hiểm nguy lớn nhất mà cô từng đối mặt. Bệnh của Maddy nổi tiếng như mức độ hiếm có của nó.
+Cô có thể bị nhiễm bệnh bởi bất cứ nguyên tố nào ngoài trời. Đó là lý do mà cô được sống trong nhà với sự chăm sóc tận tình của mẹ và cô y tá. Thế nhưng cuộc sống êm đềm đến độ nhàm chán trong ngôi nhà bong bóng của Maddy đột ngột thay đổi khi có hàng xóm mới chuyển đến. Từng cuộc trò chuyện qua email trở thành sợi dây gắn kết những rung động đầu đời giữa Maddy và cậu chàng hàng xóm, Olly. Olly là cậu trai ưa thích thể thao, chạy nhảy, leo trèo suốt ngày. Maddy đã bị Olly thu hút ngay từ ánh nhìn đầu tiên qua ô cửa sổ. Chính từ khoảnh khắc ấy, có gì đó trong Maddy đã vùng lên khi cô muốn thoát khỏi cuộc sống bong bóng đó. Khao khát muốn được sống một cuộc đời tự do và làm những điều mình muốn."
+                android:textColor="#000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.458"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mt" />
+
+
+
+
+
+            <TextView
+                android:id="@+id/mt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:text="Mô tả:"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+            <TextView
+                android:id="@+id/nxb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Nhà xuất bản: "
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvtheloai" />
+
+            <TextView
+                android:id="@+id/barcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Mã kiểm soát:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvnn" />
+            <TextView
+                android:id="@+id/tvtheloai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Thể loại"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/barcode" />
+
+            <TextView
+                android:id="@+id/slcl"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="SL:         Còn lại: "
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nxb"
+                tools:layout_editor_absoluteY="445dp" />
+
+            <TextView
+                android:id="@+id/tacgia"
+                android:layout_width="179dp"
+
+                android:layout_height="45dp"
+
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Tác giả:"
+                android:textSize="13dp"
+                app:layout_constraintStart_toEndOf="@+id/image_sach"
+                app:layout_constraintTop_toBottomOf="@+id/tensach" />
+
+
+            <TextView
+                android:id="@+id/tensach"
+                android:layout_width="227dp"
+                android:layout_height="68dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="Tên sách"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/image_sach"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/image_sach"
+                android:layout_width="143dp"
+                android:layout_height="206dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/no_img" />
+
+            <com.willy.ratingbar.RotationRatingBar
+                android:id="@+id/rotationratingbar"
+                android:layout_width="185dp"
+                android:layout_height="37dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintStart_toEndOf="@+id/image_sach"
+                app:layout_constraintTop_toBottomOf="@+id/tacgia"
+                app:srb_clearRatingEnabled="true"
+                app:srb_clickable="true"
+                app:srb_drawableEmpty="@drawable/empty"
+                app:srb_drawableFilled="@drawable/filled"
+                app:srb_isIndicator="false"
+                app:srb_minimumStars="1"
+                app:srb_numStars="5"
+                app:srb_rating="2"
+                app:srb_scrollable="true"
+                app:srb_starHeight="25dp"
+                app:srb_starPadding="5dp"
+                app:srb_starWidth="25dp"
+                app:srb_stepSize="0.5"></com.willy.ratingbar.RotationRatingBar>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="495dp" />
+            <View
+                android:id="@+id/line1"
+                style="@style/Divider"
+                android:background="#27000000"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/guideline4" />
+
+            <View
+                android:id="@+id/line2"
+                style="@style/Divider"
+                android:background="#27000000"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/guideline" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="254dp" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:text="Giới thiệu:"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline4" />
+            <TextView
+                android:id="@+id/tvnn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Ngôn ngữ:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+
+            <View
+                android:id="@+id/line3"
+                style="@style/Divider"
+                android:background="#27000000"
+                android:layout_marginTop="20dp"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mota" />
+            <TextView
+                android:id="@+id/comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:text="Bình luận &amp; Đánh giá:"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/line3" />
+
+
+            <com.taufiqrahman.reviewratings.RatingReviews
+                android:id="@+id/rating_reviews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="42dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="36dp"
+                android:layout_marginBottom="8dp"
+                app:animation="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView"
+                app:layout_constraintTop_toBottomOf="@id/comment"
+                app:layout_constraintVertical_bias="0.656"
+                app:max_value="100"
+                app:show_label="true"
+                app:show_raters="true"
+                app:spaces="5dp"
+                app:rounded="true"
+                app:text_color="#333333"
+                app:text_size="10sp"
+                app:width="15dp">
+
+            </com.taufiqrahman.reviewratings.RatingReviews>
+
+            <FrameLayout
+                android:id="@+id/webview_frame"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_marginTop="8dp"
+                android:fitsSystemWindows="true"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rating_reviews">
+
+               <WebView
+                   android:id="@+id/commentsView"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center|top"
+                   android:fitsSystemWindows="true">
+
+               </WebView>
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center|top"
+                    android:indeterminateTint="@color/colorPrimary"
+                    android:indeterminateTintMode="src_atop" />
+
+
+            </FrameLayout>
+
+            <Button
+                android:id="@+id/borrownow"
+                android:layout_width="90dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/mauapp"
+                android:gravity="center"
+                android:text="Mượn ngay"
+
+                android:textColor="#FFFFFF"
+                android:textSize="12dp"
+                app:layout_constraintStart_toEndOf="@+id/image_sach"
+                app:layout_constraintTop_toBottomOf="@+id/rotationratingbar" />
+
+            <Button
+                android:id="@+id/readnow"
+                android:layout_width="80dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/mauapp"
+                android:gravity="center"
+                android:text="Đọc ngay"
+
+                android:textColor="#FFFFFF"
+                android:textSize="12dp"
+                app:layout_constraintStart_toEndOf="@+id/borrownow"
+                app:layout_constraintTop_toBottomOf="@+id/rotationratingbar" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="52dp"
+                android:text="Quầy sách: 1-A"
+                app:layout_constraintStart_toEndOf="@+id/tvnn"
+                app:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <View
+        android:id="@+id/line4"
+        style="@style/Divider"
+        android:background="@drawable/mauapp"
+        android:layout_gravity="bottom"
+        app:layout_anchor="@+id/mainlayout"
+        app:layout_anchorGravity="top|center" />
+
+    <com.andremion.counterfab.CounterFab
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="auto"
+        app:rippleColor="#E53935"
+        android:outlineAmbientShadowColor="#E53935"
+        android:outlineSpotShadowColor="#E53935"
+        app:badgeBackgroundColor="#E53935"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="60dp"
+        android:src="@drawable/warehousemanagement"
+        app:layout_anchorGravity="bottom|right|end"
+        app:layout_constraintBottom_toBottomOf="@+id/drawerlayout"
+        app:layout_constraintEnd_toEndOf="parent">
+
+    </com.andremion.counterfab.CounterFab>
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
