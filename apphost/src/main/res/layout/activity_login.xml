@@ -16,63 +16,26 @@
         android:layout_marginEnd="8dp"
         android:text="@string/app_name"
         android:textColor="#FFFFFF"
-        android:textSize="50dp"
+        android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/googlelogin"
-        android:layout_width="181dp"
-        android:layout_height="38dp"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="12dp"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.528"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/facebooklogin" />
-
-
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="124dp"
-        android:gravity="center"
-        android:text="Sign in with Facebook/Gmail"
-        android:textColor="#FFFFFF"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtpassword" />
-
-    <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/forgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:gravity="center"
-        android:text="Register?"
+        android:text="Quên mật khẩu?"
         android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.809"
+        app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtpassword" />
-
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/facebooklogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.528"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
         android:id="@+id/textView14"
@@ -80,34 +43,34 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="80dp"
-        android:typeface="serif"
-        android:textStyle="italic"
         android:fontFamily="sans-serif-medium"
         android:text="Librarian Version"
         android:textColor="#FFFFFF"
+        android:textStyle="italic"
+        android:typeface="serif"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
         android:id="@+id/edtname"
         android:layout_width="278dp"
-        android:layout_height="30dp"
-
+        android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/grid2"
         android:ems="10"
-        android:hint="Tên đăng nhập/Email"
+        android:hint="@string/email"
         android:inputType="textEmailAddress"
-        android:paddingLeft="10dp"
+        android:paddingStart="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/username" />
+        app:layout_constraintTop_toBottomOf="@id/username"
+        tools:ignore="RtlSymmetry" />
 
     <EditText
         android:id="@+id/edtpassword"
         android:layout_width="278dp"
-        android:layout_height="30dp"
+        android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/grid2"
         android:ems="10"
@@ -125,9 +88,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
         android:layout_marginTop="76dp"
-        android:textStyle="bold"
-        android:text="Tên đăng nhập/ Email"
+        android:text="Email"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -137,10 +100,65 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
         android:layout_marginTop="8dp"
-        android:textStyle="bold"
         android:text="Mật khẩu"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtname" />
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/mb_brand_white"
+        android:padding="10dp"
+        android:text="Đăng nhập"
+        android:textAllCaps="false"
+        android:textColor="@color/grey_80"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".67" />
+
+    <TextView
+        android:id="@+id/registerNow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/click_to_register"
+        android:textColor="@color/mb_brand_white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/googlelogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginBtn"
+        app:layout_constraintVertical_bias=".05" />
+
+    <TextView
+        android:id="@+id/otherSignin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="Hoặc đăng nhập bằng các phương thức sau"
+        android:textColor="@color/mb_brand_white"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/registerNow"
+        tools:layout_editor_absoluteX="10dp" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/googlelogin"
+        android:layout_width="181dp"
+        android:layout_height="48dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/otherSignin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

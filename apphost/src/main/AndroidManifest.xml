@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.app.smartlibhost">
 
-
     <dist:module dist:instant="true" />
 
     <uses-feature android:name="android.hardware.camera" />
@@ -14,10 +13,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
@@ -37,12 +38,19 @@
         android:usesCleartextTraffic="false"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:icon">
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ForgotPassword"
+            android:exported="false"
+            android:label="@string/title_activity_forgot_password"
+            android:theme="@style/AppTheme" />
         <activity android:name=".activity.PhoneNumber" />
         <activity android:name=".activity.QRCodeActivity" />
         <activity android:name=".activity.ProfileActivity" />
-        <activity android:name=".activity.VerifyPhoneActivity">
+        <activity android:name=".activity.VerifyPhoneActivity" />
 
-        </activity>
         <service
             android:name=".activity.MyService"
             android:enabled="true"
@@ -55,7 +63,6 @@
         <activity
             android:name=".activity.CartActivity"
             android:configChanges="uiMode" />
-
         <activity android:name=".activity.MemberCardActivity" />
         <activity android:name=".activity.TheloaiActivity.TheLoai_Item" />
         <activity
@@ -74,8 +81,8 @@
             android:configChanges="uiMode" />
         <activity
             android:name=".activity.SplashActivity"
-            android:theme="@style/SplashTheme"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

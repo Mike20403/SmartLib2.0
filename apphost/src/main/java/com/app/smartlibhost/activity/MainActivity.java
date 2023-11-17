@@ -56,6 +56,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -68,6 +69,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -108,10 +111,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     String UId;
     String TAG = "RealtimeDB";
+    String PhotoURL = FirebaseStorage.getInstance().getReference("UserImg/default.png").getPath();
     FirebaseDatabase mdatabase = FirebaseDatabase.getInstance();
     DatabaseReference mdata = mdatabase.getReference();
     CounterFab fab;
-
 
 
 
@@ -145,12 +148,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
 
     private void AddUserToFirebase() {
-       UId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+       UId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         final Map<String, Object> userr = new HashMap<>();
-        userr.put("Name",user.getDisplayName());
-        userr.put("Email",user.getEmail());
-        userr.put("PhoneNumber",user.getPhoneNumber());
-        userr.put("PhotoURL",user.getPhotoUrl().toString());
+        userr.put("Name", user.getDisplayName());
+        userr.put("Email", user.getEmail());
+        userr.put("PhoneNumber", user.getPhoneNumber());
+        userr.put("PhotoURL", PhotoURL);
 
         mdata.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -381,7 +384,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         Log.d("Test",user.getUid());
         namee.setText(user.getDisplayName( ));
         emaill.setText(user.getEmail());
-        String photoUrl = user.getPhotoUrl().toString();
+        String photoUrl = PhotoURL;
         photoUrl = photoUrl + "?height=500";
         Picasso.get().load(photoUrl)
                 .placeholder(R.drawable.boy)
@@ -410,6 +413,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             super(manager);
         }
 
+        @NonNull
         @Override
         public Fragment getItem(int position) {
             return mFragmentList.get(position);
