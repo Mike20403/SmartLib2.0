@@ -30,8 +30,6 @@ public class fragment_banner extends Fragment {
         slider.setAdapter(new MainSliderAdapter());
         PicassoImageLoadingService picassoImageLoadingService = new PicassoImageLoadingService(getContext());
         Slider.init(picassoImageLoadingService);
-
-
         return view;
 
     }
@@ -50,25 +48,25 @@ public class fragment_banner extends Fragment {
         public void onBindImageSlide(int position, ImageSlideViewHolder viewHolder) {
             switch (position) {
                 case 0:
-                    viewHolder.bindImageSlide("https://www.upsieutoc.com/images/2019/06/27/alexferguson.jpg");
+                    viewHolder.bindImageSlide("https://static.ybox.vn/2020/10/6/1602346585293-121143864_653048828683117_753888090658765399_n.png");
                     break;
                 case 1:
-                    viewHolder.bindImageSlide("https://ioffice.tatthanh.com.vn/pic/news/images/thiet-ke-bia-sach%20(5).jpg");
+                    viewHolder.bindImageSlide("https://nguonluc.com.vn/uploads/images/2023/04/20/sachhay-dac-nhan-tam-1681986383.jpg");
                     break;
                 case 2:
-                    viewHolder.bindImageSlide("https://www.upsieutoc.com/images/2019/06/27/dac-nhan-tam.jpg");
+                    viewHolder.bindImageSlide("https://cdn0.fahasa.com/media/catalog/product/o/n/ong_gia_va_bien_ca_tai_ban_2022_1_2022_08_01_10_57_46.png");
                     break;
                 case 3:
-                    viewHolder.bindImageSlide(("https://ioffice.tatthanh.com.vn/pic/news/images/thiet-ke-bia-sach%20(6).jpg"));
+                    viewHolder.bindImageSlide(("https://cdn-images.kiotviet.vn/nhungvisao/e872925e3ceb4f60b4ef32a72f2f1266.jpg"));
                     break;
                 case 4:
-                    viewHolder.bindImageSlide("https://ioffice.tatthanh.com.vn/pic/news/images/thiet-ke-bia-sach%20(7).jpg");
+                    viewHolder.bindImageSlide("https://conhocgioi.com/wp-content/uploads/2019/06/1488509319914_4461293-900x550.jpg");
                     break;
                 case 5:
-                    viewHolder.bindImageSlide("https://ioffice.tatthanh.com.vn/pic/news/images/thiet-ke-bia-sach%20(4).jpg");
+                    viewHolder.bindImageSlide("https://hgth.1cdn.vn/thumbs/1000x0/2023/03/06/hat-giong-tam-hon-gio-qua-1.jpg");
                     break;
                 case 6:
-                    viewHolder.bindImageSlide("https://ioffice.tatthanh.com.vn/pic/news/images/thiet-ke-bia-sach%20(8).jpg");
+                    viewHolder.bindImageSlide("https://bizweb.dktcdn.net/100/180/408/files/tam-ly-hoc-toi-pham-02.jpg?v=1613983850317");
                     break;
 
 

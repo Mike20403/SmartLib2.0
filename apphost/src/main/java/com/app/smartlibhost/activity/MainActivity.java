@@ -128,9 +128,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
             ActionBar();
             GetMenu();
-            GetFBData();
-            AddUserToFirebase();
-            SetInfo();
+//            GetFBData();
+//            AddUserToFirebase();
+//            SetInfo();
             SetUpViewPager();
         } else {
 
@@ -354,16 +354,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         builder.setNegativeButton("Đăng xuất", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
                finish();
               // startActivity(new Intent(MainActivity.this,LoginActivity.class));
-
-
-
-
                 dialogInterface.dismiss();
-
-
             }
         });
         AlertDialog alertDialog = builder.create();
@@ -468,8 +461,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                             img_menu = jsonObject.getString("menu_img");
                             mang_menu.add(new Menu_main(id_menu,ten_menu,img_menu));
                             menuadapter.notifyDataSetChanged();
-
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -529,7 +520,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     public void Anhxa() {
-         fab = (CounterFab) findViewById(R.id.fab);
+        fab = (CounterFab) findViewById(R.id.fab);
         navigationView = (NavigationView) findViewById(R.id.navigation_main);
         toolbarmain = findViewById(R.id.toolbarmain);
         lvmain = (ListView) findViewById(R.id.lvmain);
