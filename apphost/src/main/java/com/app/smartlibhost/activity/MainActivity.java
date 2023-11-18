@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -50,6 +51,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -58,9 +60,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.squareup.picasso.Picasso;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import java.io.InputStream;
 import java.net.URL;
 import java.security.SecureRandom;
@@ -87,37 +86,30 @@ import static com.app.smartlibhost.activity.BorrowActivity.users_adapter;
 
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
-
+    public static String ten_menu ="test";
+    public static String img_menu ="";
+    public static int id_menu =0;
+    private final int[] COLORS = {0xFF2196F3, 0xFF00BCD4, 0xFF795548, 0xFF5B4947, 0xFFF57C00};
+    public static String email,name;
     NavigationController mNavigationController;
     ListView lvmain;
     NavigationView navigationView;
     Toolbar toolbarmain;
     DrawerLayout drawerLayout;
-    Toolbar toolbar;
     PageNavigationView tabLayout;
     ViewPager viewPager;
     ArrayList<Menu_main> mang_menu;
     Menuadapter menuadapter;
     ImageView avatar;
-    public static String email,name;
     TextView emaill,namee;
     public static ArrayList<Users> manguser;
-    ArrayList<Users> usersArrayList;
-    public static String ten_menu ="test";
-    public static String img_menu ="";
-    public static int id_menu =0;
-    private final int[] COLORS = {0xFF2196F3, 0xFF00BCD4, 0xFF795548, 0xFF5B4947, 0xFFF57C00};
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     String UId;
-    String TAG = "RealtimeDB";
     String PhotoURL = FirebaseStorage.getInstance().getReference("UserImg/default.png").getPath();
     FirebaseDatabase mdatabase = FirebaseDatabase.getInstance();
     DatabaseReference mdata = mdatabase.getReference();
     CounterFab fab;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,16 +125,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 //            SetInfo();
             SetUpViewPager();
         } else {
-
             CheckConnection.ShowToast_short(getApplicationContext(), "Bạn hãy kiểm tra lại kết nối");
             finish();
-
         }
         ListViewOnClick();
-
-
-
-
     }
 
 
@@ -202,6 +188,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Menu_main menu = mang_menu.get(position);
+                Log.d("DEBUG",menu.toString());
+
 
                 if (menu.getId() == 6) {
                     showAlertDialog();
@@ -209,18 +197,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 if (menu.getId() == 4) {
                     startActivity(new Intent(MainActivity.this, AddingBookActiviy.class));
                 }
-                if (menu.getId() == 3) {
+                if (menu.getId() == 2) {
                     startActivity(new Intent(MainActivity.this, BorrowActivity.class));
                 }
                 if (menu.getId() == 5) {
                     startActivity(new Intent(MainActivity.this, LineGraphActivity.class));
                 }
-                if (menu.getId() == 2) {
-                    startActivity(new Intent(MainActivity.this, TheLoai.class));
-                }
-                if (menu.getId() == 1){
+                if (menu.getId() == 3){
                     startActivity(new Intent(MainActivity.this,MemberCardActivity.class));
                 }
+                if (menu.getId() == 1) {
+                    startActivity(new Intent(MainActivity.this, TheLoai.class));
+                }
+
             }
         });
     }
@@ -447,34 +436,45 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     private void GetMenu() {
         mang_menu.clear();
-
-        final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(server.menu_url, new Response.Listener<JSONArray>() {
+//        Get menu from firebase storage
+        mdata.child("Menu").addChildEventListener(new ChildEventListener() {
             @Override
-            public void onResponse(JSONArray response) {
-                if (response != null) {
-                    for (int i=0; i<response.length();i++){
-                        try {
-                            JSONObject jsonObject = response.getJSONObject(i);
-                            id_menu = jsonObject.getInt("menu_id");
-                            ten_menu = jsonObject.getString("menu_name");
-                            img_menu = jsonObject.getString("menu_img");
-                            mang_menu.add(new Menu_main(id_menu,ten_menu,img_menu));
-                            menuadapter.notifyDataSetChanged();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                // Get the values from the DataSnapshot
+                int id = snapshot.child("id").getValue(Integer.class);
+                String ten_menu = snapshot.child("name").getValue(String.class);
+                String img_menu = snapshot.child("img").getValue(String.class);
+
+                // Create a Menu_main object and add it to the mang_menu list
+                Menu_main menu = new Menu_main(id, ten_menu, img_menu);
+                mang_menu.add(menu);
+
+                // Notify the adapter that the data set has changed
+                menuadapter.notifyDataSetChanged();
+                Log.d("DEBUG",snapshot.toString());
+//                mang_menu.add(menu);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
             }
-        }, new Response.ErrorListener() {
+
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-        requestQueue.add(jsonArrayRequest);
 
     }
 

@@ -36,13 +36,8 @@ public class TheLoai_Item extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thieu_nhi);
-
         GetIntent();
         Anhxa();
-
-
-
-
         ActionToolbar();
 
 
@@ -68,14 +63,8 @@ public class TheLoai_Item extends AppCompatActivity {
         });
 
         collapsingToolbarLayout.setTitle(title);
-
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
-
-
-
-
-
 
     }
 
