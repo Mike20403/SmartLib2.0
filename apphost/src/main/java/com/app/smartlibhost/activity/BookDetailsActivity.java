@@ -12,7 +12,6 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-
 import com.andremion.counterfab.CounterFab;
 import com.app.smartlibhost.epubparser.EpubParseActivity;
 import com.app.smartlibhost.model.SachFB;
@@ -20,7 +19,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
-
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.widget.NestedScrollView;
@@ -28,8 +26,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
-
 import android.os.PowerManager;
+import android.provider.Settings;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
@@ -47,7 +45,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.app.smartlibhost.R;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -63,7 +60,6 @@ import com.taufiqrahman.reviewratings.BarLabels;
 import com.taufiqrahman.reviewratings.RatingReviews;
 import com.willy.ratingbar.BaseRatingBar;
 import com.willy.ratingbar.RotationRatingBar;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -71,6 +67,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.Random;
 
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
@@ -341,7 +338,6 @@ public class BookDetailsActivity extends AppCompatActivity {
        String id_theloai = sach.getId_theloai();
        String tloai = "";
        switch (id_theloai){
-
            case "1":
                tloai = "Sách thiếu nhi";
              break;
@@ -445,6 +441,15 @@ public class BookDetailsActivity extends AppCompatActivity {
             }
             private void GetEbookUrl() {
             }
+            public void askForPermissions() {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    if (!Environment.isExternalStorageManager()) {
+                        Intent intent = new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                        startActivity(intent);
+                        return;
+                    }
+                }
+            }
             private void setupProgresdialog() {
                 String filename = sach.getBarcode()+".epub";
                 File file = new File(Environment.getExternalStorageDirectory().getPath(),filename);
@@ -454,7 +459,7 @@ public class BookDetailsActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), EpubParseActivity.class).putExtra("paths","/sdcard/"+filename));
                 }
                 else{
-
+                            askForPermissions();
                             storageReference.child(filename).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
@@ -471,7 +476,7 @@ public class BookDetailsActivity extends AppCompatActivity {
                                    mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                                    mProgressDialog.setCancelable(true);
 
-// execute this when the downloader must be fired
+                                    // execute this when the downloader must be fired
                                    final DownloadTask downloadTask = new DownloadTask( BookDetailsActivity.this);
                                    downloadTask.execute(uri.toString());
 
@@ -481,7 +486,6 @@ public class BookDetailsActivity extends AppCompatActivity {
                                            downloadTask.cancel(true);
                                        }
                                    });
-
                                }
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
@@ -491,10 +495,7 @@ public class BookDetailsActivity extends AppCompatActivity {
 
                                 }
                             });
-
-
                 }
-
             }
         });
 
@@ -505,9 +506,6 @@ public class BookDetailsActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Đã thêm vào túi",Toast.LENGTH_SHORT).show();
               String  UId = FirebaseAuth.getInstance().getCurrentUser().getUid();
             mdata.child("Users").child(UId).child("Cart").child(sach.getBarcode()).setValue(sach);
-
-
-
             }
         });
 
@@ -569,8 +567,8 @@ public class BookDetailsActivity extends AppCompatActivity {
                     return "Server returned HTTP " + connection.getResponseCode()
                             + " " + connection.getResponseMessage();
                 }
-             //   File destination = new File(context.getFilesDir(), "/EpubFolder/test.epub");
-              //  destination.createNewFile();
+                //   File destination = new File(context.getFilesDir(), "/EpubFolder/test.epub");
+                //  destination.createNewFile();
 
                 File destination = new File(Environment.getExternalStorageDirectory().getPath(),sach.getBarcode()+".epub");
                 // this will be useful to display download percentage
@@ -579,7 +577,9 @@ public class BookDetailsActivity extends AppCompatActivity {
 
                 // download the file
                 input = connection.getInputStream();
-                output = new FileOutputStream(destination);
+                Log.d("FILE","open file");
+                output = Files.newOutputStream(destination.toPath());
+
 
                 byte data[] = new byte[4096];
                 long total = 0;
@@ -594,6 +594,8 @@ public class BookDetailsActivity extends AppCompatActivity {
                     // publishing the progress....
                     if (fileLength > 0) // only if total length is known
                         publishProgress((int) (total * 100 / fileLength));
+
+
                     output.write(data, 0, count);
                 }
             } catch (Exception e) {
@@ -613,6 +615,7 @@ public class BookDetailsActivity extends AppCompatActivity {
             return null;
         }
 
+
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
@@ -626,8 +629,10 @@ public class BookDetailsActivity extends AppCompatActivity {
             super.onPostExecute(s);
             mWakeLock.release();
             mProgressDialog.dismiss();
-            if (s != null)
+            if (s != null){
                 Toast.makeText(context,"Download error: "+s, Toast.LENGTH_LONG).show();
+                Log.d("FILEDOWNLOAD",s);
+            }
             else
                 Toast.makeText(context,"File downloaded", Toast.LENGTH_SHORT).show();
         }
