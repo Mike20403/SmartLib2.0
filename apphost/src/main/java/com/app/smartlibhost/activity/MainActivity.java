@@ -30,11 +30,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import com.andremion.counterfab.CounterFab;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
 import com.app.smartlibhost.Fragment.PopupDialogFragment;
 import com.app.smartlibhost.Fragment.fragment_scrollview;
 import com.app.smartlibhost.Fragment.fragment_tracuu;
@@ -45,7 +40,6 @@ import com.app.smartlibhost.adapter.Users_adapter;
 import com.app.smartlibhost.model.Menu_main;
 import com.app.smartlibhost.model.Users;
 import com.app.smartlibhost.ultil.CheckConnection;
-import com.app.smartlibhost.ultil.server;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.material.navigation.NavigationView;
@@ -69,7 +63,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -344,7 +337,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                finish();
-              // startActivity(new Intent(MainActivity.this,LoginActivity.class));
+//                startActivity(new Intent(MainActivity.this,LoginActivity.class));
                 dialogInterface.dismiss();
             }
         });
@@ -372,8 +365,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 .placeholder(R.drawable.boy)
                 .error(R.drawable.boy)
                 .into(avatar);
-
-
     }
 
     private void setupViewPager(ViewPager viewPager) {
