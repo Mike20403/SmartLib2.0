@@ -25,6 +25,7 @@
     <uses-feature android:name="android.hardware.camera.front.autofocus" />
 
     <application
+        android:usesCleartextTraffic="true"
         android:requestLegacyExternalStorage="true"
         android:allowBackup="true"
         android:configChanges="uiMode"
@@ -34,7 +35,6 @@
         android:roundIcon="@mipmap/smartlib"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="false"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:icon">
         <activity
@@ -46,6 +46,8 @@
             android:label="@string/title_activity_forgot_password"
             android:theme="@style/AppTheme" />
         <activity android:name=".activity.PhoneNumber" />
+        <activity android:name="com.folioreader.ui.activity.SearchActivity"
+            android:exported="true"/>
         <activity android:name=".activity.QRCodeActivity" />
         <activity android:name=".activity.ProfileActivity" />
         <activity android:name=".activity.VerifyPhoneActivity" />

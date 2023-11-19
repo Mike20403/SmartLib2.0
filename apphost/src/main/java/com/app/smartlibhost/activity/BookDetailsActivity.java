@@ -12,13 +12,16 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+
 import com.andremion.counterfab.CounterFab;
 import com.app.smartlibhost.epubparser.EpubParseActivity;
 import com.app.smartlibhost.model.SachFB;
+import com.folioreader.FolioReader;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.widget.NestedScrollView;
@@ -26,8 +29,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
+
 import android.os.PowerManager;
-import android.provider.Settings;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
@@ -45,6 +48,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.app.smartlibhost.R;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -60,18 +64,21 @@ import com.taufiqrahman.reviewratings.BarLabels;
 import com.taufiqrahman.reviewratings.RatingReviews;
 import com.willy.ratingbar.BaseRatingBar;
 import com.willy.ratingbar.RotationRatingBar;
+
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.file.Files;
 import java.util.Random;
 
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 import me.everything.android.ui.overscroll.adapters.IOverScrollDecoratorAdapter;
+import nl.siegmann.epublib.domain.Book;
+import nl.siegmann.epublib.epub.EpubReader;
 
 public class BookDetailsActivity extends AppCompatActivity {
     ImageView img_sach,img_toolbar;
@@ -130,8 +137,8 @@ public class BookDetailsActivity extends AppCompatActivity {
         mdata.child("Users").child((FirebaseAuth.getInstance().getUid())).child("Cart").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               int size = (int) dataSnapshot.getChildrenCount();
-               fab.setCount(size);
+                int size = (int) dataSnapshot.getChildrenCount();
+                fab.setCount(size);
             }
 
             @Override
@@ -203,6 +210,8 @@ public class BookDetailsActivity extends AppCompatActivity {
         mWebViewComments.getSettings().setSupportZoom(false);
         mWebViewComments.getSettings().setBuiltInZoomControls(false);
         mWebViewComments.getSettings().setSavePassword(true);
+
+
         CookieManager.getInstance().setAcceptCookie(true);
         if (Build.VERSION.SDK_INT >= 21) {
             mWebViewComments.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
@@ -225,9 +234,9 @@ public class BookDetailsActivity extends AppCompatActivity {
 
         if (isLoading == true){
             progressBar.setVisibility(View.VISIBLE);
-    }
+        }
         else
-           if (isLoading == false)
+        if (isLoading == false)
             progressBar.setVisibility(View.GONE);
 
         invalidateOptionsMenu();
@@ -247,8 +256,7 @@ public class BookDetailsActivity extends AppCompatActivity {
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
             String host = Uri.parse(url).getHost();
-
-             if (url.contains("/plugins/close_popup.php?reload")) {
+            if (url.contains("/plugins/close_popup.php?reload")) {
                 final Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -256,6 +264,7 @@ public class BookDetailsActivity extends AppCompatActivity {
                         //Do something after 100ms
                         mContainer.removeView(mWebviewPop);
                         loadComments();
+
                     }
                 }, 600);
             }
@@ -281,6 +290,8 @@ public class BookDetailsActivity extends AppCompatActivity {
         }
 
         public boolean isInAbsoluteStart() {
+
+
             return !this.mView.canScrollVertically(-1);
         }
 
@@ -331,65 +342,67 @@ public class BookDetailsActivity extends AppCompatActivity {
 
     private void GetInformation() {
         Intent intent = getIntent();
-          sach = (SachFB) intent.getSerializableExtra("thongtinsach");
-       tensach.setText(sach.getTensach());
-       id_sach = sach.getId_sach();
-       tacgia.setText("Tác giả: "+sach.getTentacgia());
-       String id_theloai = sach.getId_theloai();
-       String tloai = "";
-       switch (id_theloai){
-           case "1":
-               tloai = "Sách thiếu nhi";
-             break;
-           case "2":
+        sach = (SachFB) intent.getSerializableExtra("thongtinsach");
+        tensach.setText(sach.getTensach());
+        id_sach = sach.getId_sach();
+        tacgia.setText("Tác giả: "+sach.getTentacgia());
+        String id_theloai = sach.getId_theloai();
+        String tloai = "";
+        switch (id_theloai){
+
+            case "1":
+                tloai = "Sách thiếu nhi";
+                break;
+            case "2":
                 tloai ="Giáo trình";
-               break;
-           case "3":
-               tloai ="Chính trị - Pháp luật";
+                break;
+            case "3":
+                tloai ="Chính trị - Pháp luật";
 
-               break;
-           case "4":
+                break;
+            case "4":
                 tloai ="Văn hóa xã hội - Lịch sử";
-               break;
+                break;
 
-           case "5":
+            case "5":
                 tloai ="Truyện - Tiểu thuyết";
-               break;
+                break;
 
-           case "6":
+            case "6":
                 tloai ="Khoa học - Kinh tế";
-               break;
+                break;
 
-           case "7":
+            case "7":
                 tloai ="Văn học nghệ thuật";
-               break;
+                break;
 
-           case "8":
+            case "8":
                 tloai ="Tâm linh, Tôn giáo";
-               break;
+                break;
 
-           case "9":
+            case "9":
                 tloai ="Đời sống";
-               break;
-        default:
-            break;
-       }
-       theloai.setText("Thể loại:    "+ tloai);
-       String id_nn = sach.getId_ngonngu();
-       String nn = "";
-       switch (id_nn){
-           case "1":
-               nn ="Tiếng Việt";
-               break;
-           case "2":
-               nn ="Tiếng Anh";
-               break;
-       }
-       ngonngu.setText("Ngôn ngữ:    "+nn);
-       nxb.setText("NXB:    "+sach.getNXB());
-       barcode.setText("Mã kiểm soát:    "+sach.getBarcode());
-       slcl.setText("SL: "+sach.getSoluong()+"      Còn lại: "+sach.getConlai());
-       mota.setText(sach.getMota());
+                break;
+            default:
+
+
+        }
+        theloai.setText("Thể loại:    "+ tloai);
+        String id_nn = sach.getId_ngonngu();
+        String nn = "";
+        switch (id_nn){
+            case "1":
+                nn ="Tiếng Việt";
+                break;
+            case "2":
+                nn ="Tiếng Anh";
+                break;
+        }
+        ngonngu.setText("Ngôn ngữ:    "+nn);
+        nxb.setText("NXB:    "+sach.getNXB());
+        barcode.setText("Mã kiểm soát:    "+sach.getBarcode());
+        slcl.setText("SL: "+sach.getSoluong()+"      Còn lại: "+sach.getConlai());
+        mota.setText(sach.getMota());
         Picasso.get().load(sach.getImg_sach())
                 .placeholder(R.drawable.no_img)
                 .error(R.drawable.no_img).
@@ -404,10 +417,12 @@ public class BookDetailsActivity extends AppCompatActivity {
                 PhotoView photoView = mView.findViewById(R.id.photoview);
                 Picasso.get().load(sach.getImg_sach()).
                         into(photoView);
-
                 mBuilder.setView(mView);
                 AlertDialog mDialog = mBuilder.create();
                 mDialog.show();
+                // mDialog.getWindow().setLayout(1250, 1800);
+
+
             }
         });
 
@@ -423,6 +438,7 @@ public class BookDetailsActivity extends AppCompatActivity {
             }
         });
         collapsingToolbarLayout.setTitle("Details");
+
         /*collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);*/
     }
@@ -441,61 +457,69 @@ public class BookDetailsActivity extends AppCompatActivity {
             }
             private void GetEbookUrl() {
             }
-            public void askForPermissions() {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    if (!Environment.isExternalStorageManager()) {
-                        Intent intent = new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
-                        startActivity(intent);
-                        return;
-                    }
-                }
-            }
             private void setupProgresdialog() {
+
                 String filename = sach.getBarcode()+".epub";
                 File file = new File(Environment.getExternalStorageDirectory().getPath(),filename);
                 Log.d("Ebook",file.toString());
 
                 if(file.exists()){
-                    startActivity(new Intent(getApplicationContext(), EpubParseActivity.class).putExtra("paths","/sdcard/"+filename));
+//                    startActivity(new Intent(getApplicationContext(), EpubParseActivity.class).putExtra("paths","/sdcard/"+filename));
+                    try {
+                        FileInputStream inputStream = new FileInputStream(file);
+                        FolioReader folioReader = FolioReader.get();
+                        folioReader.openBook(file.getAbsolutePath());
+                        // Pass the InputStream to the EpubReader for parsing
+                        EpubReader epubReader = new EpubReader();
+                        Book book = epubReader.readEpub(inputStream);
+                        Log.i("epublib", "title: " + book.getTitle());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                 }
                 else{
-                            askForPermissions();
-                            storageReference.child(filename).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                               if (uri == null){
-                                   Toast.makeText(getApplicationContext(),"Sách hiện chưa có Ebook, vui lòng quay lại sau !",Toast.LENGTH_LONG).show();
 
-                               } else
-                               {
-                                   Log.d("Ebooks",String.valueOf(uri));
-                                   // instantiate it within the onCreate method
-                                   mProgressDialog = new android.app.ProgressDialog(BookDetailsActivity.this);
-                                   mProgressDialog.setMessage("Downloading...");
-                                   mProgressDialog.setIndeterminate(true);
-                                   mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                                   mProgressDialog.setCancelable(true);
+                    storageReference.child(filename).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            if (uri == null){
+                                Toast.makeText(getApplicationContext(),"Sách hiện chưa có Ebook, vui lòng quay lại sau !",Toast.LENGTH_LONG).show();
 
-                                    // execute this when the downloader must be fired
-                                   final DownloadTask downloadTask = new DownloadTask( BookDetailsActivity.this);
-                                   downloadTask.execute(uri.toString());
+                            } else
+                            {
+                                Log.d("Ebooks",String.valueOf(uri));
+                                // instantiate it within the onCreate method
+                                mProgressDialog = new android.app.ProgressDialog(BookDetailsActivity.this);
+                                mProgressDialog.setMessage("Downloading...");
+                                mProgressDialog.setIndeterminate(true);
+                                mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                                mProgressDialog.setCancelable(true);
 
-                                   mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                       @Override
-                                       public void onCancel(DialogInterface dialog) {
-                                           downloadTask.cancel(true);
-                                       }
-                                   });
-                               }
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(getApplicationContext(),"Sách hiện chưa có Ebook, vui lòng quay lại sau !",Toast.LENGTH_LONG).show();
+// execute this when the downloader must be fired
+                                final DownloadTask downloadTask = new DownloadTask( BookDetailsActivity.this);
+                                downloadTask.execute(uri.toString());
 
-                                }
-                            });
+                                mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                    @Override
+                                    public void onCancel(DialogInterface dialog) {
+                                        downloadTask.cancel(true);
+                                    }
+                                });
+
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(),"Sách hiện chưa có Ebook, vui lòng quay lại sau !",Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+
+
                 }
+
             }
         });
 
@@ -504,8 +528,11 @@ public class BookDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(),"Đã thêm vào túi",Toast.LENGTH_SHORT).show();
-              String  UId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            mdata.child("Users").child(UId).child("Cart").child(sach.getBarcode()).setValue(sach);
+                String  UId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                mdata.child("Users").child(UId).child("Cart").child(sach.getBarcode()).setValue(sach);
+
+
+
             }
         });
 
@@ -513,7 +540,7 @@ public class BookDetailsActivity extends AppCompatActivity {
         ngonngu = (TextView) findViewById(R.id.tvnn);
         barcode = (TextView) findViewById(R.id.barcode);
         img_toolbar = (ImageView) findViewById(R.id.imagetoolbar);
-       detail_toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+        detail_toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         img_sach = (ImageView) findViewById(R.id.image_sach);
         tensach = (TextView) findViewById(R.id.tensach);
         tacgia = (TextView) findViewById(R.id.tacgia);
@@ -528,7 +555,7 @@ public class BookDetailsActivity extends AppCompatActivity {
         mContainer = (FrameLayout) findViewById(R.id.webview_frame);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         nestedScrollView = (NestedScrollView) findViewById(R.id.mainlayout);
-       // new VerticalOverScrollBounceEffectDecorator(new NestedScrollViewOverScrollDecorAdapter(nestedScrollView));
+        // new VerticalOverScrollBounceEffectDecorator(new NestedScrollViewOverScrollDecorAdapter(nestedScrollView));
 
     }
 
@@ -577,9 +604,7 @@ public class BookDetailsActivity extends AppCompatActivity {
 
                 // download the file
                 input = connection.getInputStream();
-                Log.d("FILE","open file");
-                output = Files.newOutputStream(destination.toPath());
-
+                output = new FileOutputStream(destination);
 
                 byte data[] = new byte[4096];
                 long total = 0;
@@ -594,8 +619,6 @@ public class BookDetailsActivity extends AppCompatActivity {
                     // publishing the progress....
                     if (fileLength > 0) // only if total length is known
                         publishProgress((int) (total * 100 / fileLength));
-
-
                     output.write(data, 0, count);
                 }
             } catch (Exception e) {
@@ -615,7 +638,6 @@ public class BookDetailsActivity extends AppCompatActivity {
             return null;
         }
 
-
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
@@ -629,10 +651,8 @@ public class BookDetailsActivity extends AppCompatActivity {
             super.onPostExecute(s);
             mWakeLock.release();
             mProgressDialog.dismiss();
-            if (s != null){
+            if (s != null)
                 Toast.makeText(context,"Download error: "+s, Toast.LENGTH_LONG).show();
-                Log.d("FILEDOWNLOAD",s);
-            }
             else
                 Toast.makeText(context,"File downloaded", Toast.LENGTH_SHORT).show();
         }

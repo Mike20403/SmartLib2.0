@@ -35,12 +35,18 @@ android {
 configurations {
     cleanedAnnotations
     implementation.exclude group: 'org.jetbrains' , module:'annotations'
+    implementation.exclude group: 'org.jetbrains' , module:'annotations'
+    implementation.exclude group : 'nl.siegmann.epublib' , module : 'epublib-core'
+    implementation.exclude group : 'nl.siegmann.epublib' , module : 'epublib-core-latest'
+    implementation.exclude group : 'org.slf4j' , module : 'slf4j-android'
+    implementation.exclude group : 'org.slf4j' , module : 'slf4j-api'
 }
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //noinspection GradleCompatible
-    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.annotation:annotation:1.7.0'
@@ -84,13 +90,13 @@ dependencies {
     }
 
 
-    // implementation 'com.folioreader:folioreader:0.4.2'
+     implementation 'com.folioreader:folioreader:0.5.4'
 
-    //implementation('nl.siegmann.epublib:epublib-core:3.1') {
-    //  exclude group: 'org.slf4j'
-    // exclude group: 'xmlpull'
-    // }
-    // implementation 'org.slf4j:slf4j-android:1.7.25'
+    implementation('nl.siegmann.epublib:epublib-core:3.1') {
+      exclude group: 'org.slf4j'
+     exclude group: 'xmlpull'
+     }
+     implementation 'org.slf4j:slf4j-android:1.7.25'
 
     //implementation 'gapp.season:bookreader:1.0.2'
 
@@ -99,7 +105,7 @@ dependencies {
 
     implementation 'com.wajahatkarim:easyflipviewpager:2.0.1'
     implementation 'com.agrawalsuneet.androidlibs:dotsloader:1.4'
-
+    implementation 'com.android.support:appcompat-v7:latest_version'
     // this line must be included to integrate with Firebase
     //noinspection GradleCompatible
     implementation 'com.google.firebase:firebase-messaging:23.3.1'
