@@ -18,10 +18,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgotPassword extends AppCompatActivity {
 
-    Button btnReset;
-    TextInputEditText editTextEmail;
-    FirebaseAuth mAuth;
-    String strEmail;
+    private Button btnReset;
+    private TextInputEditText editTextEmail;
+    private FirebaseAuth mAuth;
+    private String strEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +36,9 @@ public class ForgotPassword extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 strEmail = String.valueOf(editTextEmail.getText()).trim();
-                if(!TextUtils.isEmpty(strEmail)) {
+                if (!TextUtils.isEmpty(strEmail)) {
                     ResetPassword();
-                }
-                else{
+                } else {
                     Toast.makeText(ForgotPassword.this, "Hãy điền email của bạn", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -60,12 +59,11 @@ public class ForgotPassword extends AppCompatActivity {
                         finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ForgotPassword.this, "Error: -" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        btnReset.setVisibility(View.VISIBLE);
-                    }
-                });
-
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(ForgotPassword.this, "Error: -" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                btnReset.setVisibility(View.VISIBLE);
+            }
+        });
     }
 }
