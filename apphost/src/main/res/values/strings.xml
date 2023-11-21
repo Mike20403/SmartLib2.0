@@ -82,5 +82,6 @@
     <string name="register">Đăng ký</string>
     <string name="click_to_login">Đã có tài khoản? Ấn để đăng nhập</string>
     <string name="click_to_register">Chưa có tài khoản? Ấn để đăng ký</string>
+    <string name="web_client_id">499803935485-mm2ggj393hvjjhqttsshvq5rls8aomam.apps.googleusercontent.com</string>
 
 </resources>

@@ -42,6 +42,43 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:499803935485:android:f7e80e7745bb1c0adea494",
+        "android_client_info": {
+          "package_name": "com.app.smartlibuser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "499803935485-641cahjscb87htrs3n9pjkor0ohc03uf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.smartlibuser",
+            "certificate_hash": "18c3f18f0ef9a97434d8b541bbc7cbddab39d985"
+          }
+        },
+        {
+          "client_id": "499803935485-mm2ggj393hvjjhqttsshvq5rls8aomam.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwT_5ECwQQ3RqVufBsxZz8bjwXaDdsxi8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "499803935485-mm2ggj393hvjjhqttsshvq5rls8aomam.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

@@ -117,8 +117,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     CounterFab fab;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -219,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     startActivity(new Intent(MainActivity.this, TheLoai.class));
                 }
                 if (menu.getId() == 1){
-                    startActivity(new Intent(MainActivity.this,MemberCardActivity.class));
+                    startActivity(new Intent(MainActivity.this, MemberCardActivity.class));
                 }
             }
         });
