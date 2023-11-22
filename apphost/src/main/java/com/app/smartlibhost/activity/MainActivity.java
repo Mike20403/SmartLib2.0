@@ -56,6 +56,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -68,6 +69,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -108,12 +111,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     String UId;
     String TAG = "RealtimeDB";
+    String PhotoURL = FirebaseStorage.getInstance().getReference("UserImg/default.png").getPath();
     FirebaseDatabase mdatabase = FirebaseDatabase.getInstance();
     DatabaseReference mdata = mdatabase.getReference();
     CounterFab fab;
-
-
-
 
 
     @Override
@@ -125,9 +126,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
             ActionBar();
             GetMenu();
-            GetFBData();
-            AddUserToFirebase();
-            SetInfo();
+//            GetFBData();
+//            AddUserToFirebase();
+//            SetInfo();
             SetUpViewPager();
         } else {
 
@@ -145,12 +146,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
 
     private void AddUserToFirebase() {
-       UId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+       UId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         final Map<String, Object> userr = new HashMap<>();
-        userr.put("Name",user.getDisplayName());
-        userr.put("Email",user.getEmail());
-        userr.put("PhoneNumber",user.getPhoneNumber());
-        userr.put("PhotoURL",user.getPhotoUrl().toString());
+        userr.put("Name", user.getDisplayName());
+        userr.put("Email", user.getEmail());
+        userr.put("PhoneNumber", user.getPhoneNumber());
+        userr.put("PhotoURL", PhotoURL);
 
         mdata.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -216,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     startActivity(new Intent(MainActivity.this, TheLoai.class));
                 }
                 if (menu.getId() == 1){
-                    startActivity(new Intent(MainActivity.this,MemberCardActivity.class));
+                    startActivity(new Intent(MainActivity.this, MemberCardActivity.class));
                 }
             }
         });
@@ -351,16 +352,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         builder.setNegativeButton("Đăng xuất", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
                finish();
               // startActivity(new Intent(MainActivity.this,LoginActivity.class));
-
-
-
-
                 dialogInterface.dismiss();
-
-
             }
         });
         AlertDialog alertDialog = builder.create();
@@ -381,7 +375,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         Log.d("Test",user.getUid());
         namee.setText(user.getDisplayName( ));
         emaill.setText(user.getEmail());
-        String photoUrl = user.getPhotoUrl().toString();
+        String photoUrl = PhotoURL;
         photoUrl = photoUrl + "?height=500";
         Picasso.get().load(photoUrl)
                 .placeholder(R.drawable.boy)
@@ -410,6 +404,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             super(manager);
         }
 
+        @NonNull
         @Override
         public Fragment getItem(int position) {
             return mFragmentList.get(position);
@@ -464,8 +459,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                             img_menu = jsonObject.getString("menu_img");
                             mang_menu.add(new Menu_main(id_menu,ten_menu,img_menu));
                             menuadapter.notifyDataSetChanged();
-
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -525,7 +518,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     public void Anhxa() {
-         fab = (CounterFab) findViewById(R.id.fab);
+        fab = (CounterFab) findViewById(R.id.fab);
         navigationView = (NavigationView) findViewById(R.id.navigation_main);
         toolbarmain = findViewById(R.id.toolbarmain);
         lvmain = (ListView) findViewById(R.id.lvmain);
