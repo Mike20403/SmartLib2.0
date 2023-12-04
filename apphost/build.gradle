@@ -117,6 +117,7 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-firestore:8.0.2'
 
     // FirebaseUI for Firebase Auth
+    implementation 'com.google.android.gms:play-services-auth:20.7.0'
     implementation 'com.firebaseui:firebase-ui-auth:8.0.2'
     implementation 'com.facebook.android:facebook-android-sdk:16.2.0'
 

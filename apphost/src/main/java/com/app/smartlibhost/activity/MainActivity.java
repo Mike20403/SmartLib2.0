@@ -198,6 +198,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 }
                 if (menu.getId() == 3){
                     startActivity(new Intent(MainActivity.this,MemberCardActivity.class));
+
                 }
                 if (menu.getId() == 1) {
                     startActivity(new Intent(MainActivity.this, TheLoai.class));
@@ -337,7 +338,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                finish();
-//                startActivity(new Intent(MainActivity.this,LoginActivity.class));
                 dialogInterface.dismiss();
             }
         });
@@ -427,7 +427,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     private void GetMenu() {
         mang_menu.clear();
-//        Get menu from firebase storage
         mdata.child("Menu").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -443,7 +442,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 // Notify the adapter that the data set has changed
                 menuadapter.notifyDataSetChanged();
                 Log.d("DEBUG",snapshot.toString());
-//                mang_menu.add(menu);
+
             }
 
             @Override
@@ -527,7 +526,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         viewPager= (ViewPager) findViewById(R.id.viewpager);
         manguser = new ArrayList<>();
         users_adapter = new Users_adapter(this,R.layout.dong_user,manguser);
-        // OverScrollDecoratorHelper.setUpOverScroll(lvmain);
         new VerticalOverScrollBounceEffectDecorator(new AbsListViewOverScrollDecorAdapter(lvmain));
 
 
@@ -549,8 +547,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         @Override
         protected void onPostExecute(Bitmap result) {
             if (result != null) {
-                // avatar.getLayoutParams().width = (getResources().getDisplayMetrics().widthPixels / 100) * 24;
-                // avatar.setImageBitmap(result);
+
             }
         }
     }
@@ -559,7 +556,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     @Override
     protected void onStart() {
-        //recreate();
         super.onStart();
     }
 }
