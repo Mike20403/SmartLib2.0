@@ -210,8 +210,6 @@ public class BookDetailsActivity extends AppCompatActivity {
         mWebViewComments.getSettings().setSupportZoom(false);
         mWebViewComments.getSettings().setBuiltInZoomControls(false);
         mWebViewComments.getSettings().setSavePassword(true);
-
-
         CookieManager.getInstance().setAcceptCookie(true);
         if (Build.VERSION.SDK_INT >= 21) {
             mWebViewComments.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
@@ -256,7 +254,9 @@ public class BookDetailsActivity extends AppCompatActivity {
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
             String host = Uri.parse(url).getHost();
+
             if (url.contains("/plugins/close_popup.php?reload")) {
+
                 final Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -264,7 +264,6 @@ public class BookDetailsActivity extends AppCompatActivity {
                         //Do something after 100ms
                         mContainer.removeView(mWebviewPop);
                         loadComments();
-
                     }
                 }, 600);
             }
@@ -290,8 +289,6 @@ public class BookDetailsActivity extends AppCompatActivity {
         }
 
         public boolean isInAbsoluteStart() {
-
-
             return !this.mView.canScrollVertically(-1);
         }
 
@@ -420,9 +417,6 @@ public class BookDetailsActivity extends AppCompatActivity {
                 mBuilder.setView(mView);
                 AlertDialog mDialog = mBuilder.create();
                 mDialog.show();
-                // mDialog.getWindow().setLayout(1250, 1800);
-
-
             }
         });
 
@@ -438,9 +432,6 @@ public class BookDetailsActivity extends AppCompatActivity {
             }
         });
         collapsingToolbarLayout.setTitle("Details");
-
-        /*collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
-        collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);*/
     }
 
 
@@ -464,7 +455,6 @@ public class BookDetailsActivity extends AppCompatActivity {
                 Log.d("Ebook",file.toString());
 
                 if(file.exists()){
-//                    startActivity(new Intent(getApplicationContext(), EpubParseActivity.class).putExtra("paths","/sdcard/"+filename));
                     try {
                         FileInputStream inputStream = new FileInputStream(file);
                         FolioReader folioReader = FolioReader.get();
@@ -476,6 +466,7 @@ public class BookDetailsActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
 
                 }
                 else{

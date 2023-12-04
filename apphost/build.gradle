@@ -106,6 +106,7 @@ dependencies {
     implementation 'com.wajahatkarim:easyflipviewpager:2.0.1'
     implementation 'com.agrawalsuneet.androidlibs:dotsloader:1.4'
     implementation 'com.android.support:appcompat-v7:latest_version'
+
     // this line must be included to integrate with Firebase
     //noinspection GradleCompatible
     implementation 'com.google.firebase:firebase-messaging:23.3.1'
