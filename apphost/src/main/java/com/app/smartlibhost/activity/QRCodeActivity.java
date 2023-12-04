@@ -76,9 +76,7 @@ public class QRCodeActivity extends AppCompatActivity {
                 .placeholder(R.drawable.no_img)
                 .error(R.drawable.no_img)
                 .into(qrcode);
-        
 */
-
         QRCodeWriter writer = new QRCodeWriter();
         try {
             BitMatrix bitMatrix = writer.encode(qrdata, BarcodeFormat.QR_CODE, 512, 512);
