@@ -76,26 +76,17 @@ public class fragment_scrollview<context> extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home,container,false);
-
-
-
                       Anhxa();
                       GetData();
                       //ActionViewFlipper();
                      // Getsachmoi();
                       SetRecyclerView();
-
-
                scrollView.post(new Runnable() {
                 @Override
                 public void run() {
-
                     scrollView.fullScroll(ScrollView.FOCUS_UP);
                 }
             });
-
-
-
 
             return  view;
     }
@@ -108,24 +99,12 @@ public class fragment_scrollview<context> extends Fragment {
         }
 
         @Override
-        public void getItemOffsets(Rect outRect, View view,
-                                   RecyclerView parent, RecyclerView.State state) {
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
             outRect.left = space;
             outRect.right = space;
             outRect.bottom = space;
-
-            // Add top margin only for the first item to avoid double space between items
-           /* if (parent.getChildLayoutPosition(view) == 0) {
-                outRect.top = space;
-            } else {
-                outRect.top = 0;
-            } */
         }
     }
-
-
-
-
 
     private void SetRecyclerView() {
         recyclerView = view.findViewById(R.id.recycleviewmain);
@@ -223,7 +202,6 @@ public class fragment_scrollview<context> extends Fragment {
         sach_adapter9 = new sach_adapter(ms9,getActivity());
         rv9.setAdapter(sach_adapter9);
         sach_adapter9.notifyDataSetChanged();
-
     }
     private void GetData() {
         array.clear();
@@ -237,12 +215,10 @@ public class fragment_scrollview<context> extends Fragment {
                 array.add(sach);
                 Log.d("Data2",""+(array.size()));
                 getResponse();
-
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
             }
 
             @Override
@@ -272,8 +248,6 @@ public class fragment_scrollview<context> extends Fragment {
         mangsach.clear();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String todayString = formatter.format(Calendar.getInstance().getTime());
-
-
                 if (array!= null){
                     if (array.size() >0) {
                         for (int i =array.size()-1 ; i>=0;i--) {
@@ -354,8 +328,6 @@ public class fragment_scrollview<context> extends Fragment {
                                 default:
 
                             }
-
-
                             sach_adapter2.notifyDataSetChanged();
                             sach_adapter1.notifyDataSetChanged();
                             sach_adapter3.notifyDataSetChanged();
@@ -365,22 +337,9 @@ public class fragment_scrollview<context> extends Fragment {
                             sach_adapter7.notifyDataSetChanged();
                             sach_adapter8.notifyDataSetChanged();
                             sach_adapter9.notifyDataSetChanged();
-
-
                         }
-
                     }
-
                 }
-
-
-
-
-
-
-
-
-
     }
 
 
@@ -404,7 +363,6 @@ public class fragment_scrollview<context> extends Fragment {
 
     }
 
-
     public class NestedScrollViewOverScrollDecorAdapter implements IOverScrollDecoratorAdapter {
         protected final NestedScrollView mView;
 
@@ -417,8 +375,6 @@ public class fragment_scrollview<context> extends Fragment {
         }
 
         public boolean isInAbsoluteStart() {
-
-
             return !this.mView.canScrollVertically(-1);
         }
 

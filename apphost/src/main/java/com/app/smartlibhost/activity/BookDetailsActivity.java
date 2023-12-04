@@ -109,28 +109,16 @@ public class BookDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_book_details_);
-
         Anhxa();
         ActionToolbar();
         GetInformation();
-
         postUrl = "http://smartlib.keyshop.vn/"+id_sach;
-
-
         setLoading(true);
-
         loadComments();
         loadanim();
         loadRatingBar();
         FiveStarsRating();
         setupFAB();
-
-
-
-
-
-
-
     }
     private void setupFAB() {
         fab = (CounterFab) findViewById(R.id.fab);
@@ -218,8 +206,6 @@ public class BookDetailsActivity extends AppCompatActivity {
         mWebViewComments.getSettings().setSupportZoom(false);
         mWebViewComments.getSettings().setBuiltInZoomControls(false);
         mWebViewComments.getSettings().setSavePassword(true);
-
-
         CookieManager.getInstance().setAcceptCookie(true);
         if (Build.VERSION.SDK_INT >= 21) {
             mWebViewComments.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
@@ -265,9 +251,6 @@ public class BookDetailsActivity extends AppCompatActivity {
             super.onPageFinished(view, url);
             String host = Uri.parse(url).getHost();
 
-
-
-
              if (url.contains("/plugins/close_popup.php?reload")) {
                 final Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
@@ -276,9 +259,6 @@ public class BookDetailsActivity extends AppCompatActivity {
                         //Do something after 100ms
                         mContainer.removeView(mWebviewPop);
                         loadComments();
-
-
-
                     }
                 }, 600);
             }
@@ -304,8 +284,6 @@ public class BookDetailsActivity extends AppCompatActivity {
         }
 
         public boolean isInAbsoluteStart() {
-
-
             return !this.mView.canScrollVertically(-1);
         }
 
@@ -398,8 +376,7 @@ public class BookDetailsActivity extends AppCompatActivity {
                 tloai ="Đời sống";
                break;
         default:
-
-
+            break;
        }
        theloai.setText("Thể loại:    "+ tloai);
        String id_nn = sach.getId_ngonngu();
@@ -434,12 +411,7 @@ public class BookDetailsActivity extends AppCompatActivity {
 
                 mBuilder.setView(mView);
                 AlertDialog mDialog = mBuilder.create();
-
-
                 mDialog.show();
-               // mDialog.getWindow().setLayout(1250, 1800);
-
-
             }
         });
 
@@ -455,7 +427,6 @@ public class BookDetailsActivity extends AppCompatActivity {
             }
         });
         collapsingToolbarLayout.setTitle("Details");
-
         /*collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);*/
     }
@@ -467,7 +438,7 @@ public class BookDetailsActivity extends AppCompatActivity {
         readnow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
                 GetEbookUrl();
                 setupProgresdialog();
 
@@ -478,10 +449,9 @@ public class BookDetailsActivity extends AppCompatActivity {
                 String filename = sach.getBarcode()+".epub";
                 File file = new File(Environment.getExternalStorageDirectory().getPath(),filename);
                 Log.d("Ebook",file.toString());
+
                 if(file.exists()){
-
                     startActivity(new Intent(getApplicationContext(), EpubParseActivity.class).putExtra("paths","/sdcard/"+filename));
-
                 }
                 else{
 
