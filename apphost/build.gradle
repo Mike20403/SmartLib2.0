@@ -113,6 +113,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:21.1.1'
     implementation 'com.google.firebase:firebase-auth:22.3.0'
     implementation 'com.google.android.gms:play-services-auth:20.7.0'
+
     implementation "com.google.firebase:firebase-analytics"
     implementation "com.google.firebase:firebase-database"
     implementation(platform('com.google.firebase:firebase-bom:32.5.0'))
@@ -126,7 +127,7 @@ dependencies {
     // FirebaseUI for Firebase Auth
     implementation 'com.google.android.gms:play-services-auth:20.7.0'
     implementation 'com.firebaseui:firebase-ui-auth:8.0.2'
-    implementation 'com.facebook.android:facebook-android-sdk:16.2.0'
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 
     // FirebaseUI for Cloud Storage
     implementation 'com.firebaseui:firebase-ui-storage:8.0.2'

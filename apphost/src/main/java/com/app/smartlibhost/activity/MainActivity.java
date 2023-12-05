@@ -40,6 +40,7 @@ import com.app.smartlibhost.adapter.Users_adapter;
 import com.app.smartlibhost.model.Menu_main;
 import com.app.smartlibhost.model.Users;
 import com.app.smartlibhost.ultil.CheckConnection;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.material.navigation.NavigationView;
@@ -97,6 +98,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     TextView emaill,namee;
     public static ArrayList<Users> manguser;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    GoogleSignInClient gsc;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     String UId;
     String PhotoURL = FirebaseStorage.getInstance().getReference("UserImg/default.png").getPath();
@@ -113,9 +116,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
             ActionBar();
             GetMenu();
-//            GetFBData();
-//            AddUserToFirebase();
-//            SetInfo();
             SetUpViewPager();
         } else {
             CheckConnection.ShowToast_short(getApplicationContext(), "Bạn hãy kiểm tra lại kết nối");
@@ -339,6 +339,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             public void onClick(DialogInterface dialogInterface, int i) {
                finish();
                 dialogInterface.dismiss();
+                mAuth.signOut();
+
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
             }
         });
         AlertDialog alertDialog = builder.create();
