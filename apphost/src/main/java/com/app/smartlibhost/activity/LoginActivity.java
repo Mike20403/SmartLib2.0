@@ -62,11 +62,9 @@ public class LoginActivity extends AppCompatActivity {
         gsc.signOut();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null) {
-            if(currentUser.isEmailVerified()) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
@@ -83,15 +81,16 @@ public class LoginActivity extends AppCompatActivity {
         googleBtn = findViewById(R.id.googleSignIn);
         fbBtn = findViewById(R.id.facebookSignIn);
 
-        fbBtn.setReadPermissions("email", "public_profile");
-        // Initialize Facebook Sign In
-        FacebookSdk.setClientToken(String.valueOf(R.string.facebook_app_id));
+        // Initialize FacebookSDK
         FacebookSdk.sdkInitialize(LoginActivity.this);
+
+        // Initialize Facebook Sign In
+        fbBtn.setReadPermissions("email", "public_profile");
         mCallbackManager = CallbackManager.Factory.create();
 
         // Initialize Google Sign In
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.web_client_id))
+                .requestIdToken(getString(com.firebase.ui.auth.R.string.default_web_client_id))
                 .requestEmail()
                 .build();
         gsc = GoogleSignIn.getClient(LoginActivity.this, gso);
@@ -162,12 +161,24 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        fbBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signInFacebook();
-            }
-        });
+        fbBtn.registerCallback(mCallbackManager
+                , new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        Log.d("Facebook Callback","onSuccess");
+                        handleFacebookAccessToken(loginResult.getAccessToken());
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Log.d("Facebook Callback","onCancel");
+                    }
+
+                    @Override
+                    public void onError(FacebookException error) {
+                        Log.d("Facebook Callback","onError");
+                    }
+                });
 
     }
 
@@ -191,28 +202,6 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
-                    }
-                });
-    }
-
-    private void signInFacebook() {
-
-         LoginManager.getInstance().registerCallback(mCallbackManager
-                , new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        Log.d("FACEBOOK","test");
-                        handleFacebookAccessToken(loginResult.getAccessToken());
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        Log.d("FACEBOOK","test");
-                    }
-
-                    @Override
-                    public void onError(FacebookException error) {
-                        Log.d("FACEBOOK","test");
                     }
                 });
     }
