@@ -17,13 +17,8 @@ public class TheLoai extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_the_loai);
-
-
         Anhxa();
         ActionToolbar();
-
-
-
     }
    
     private void ActionToolbar() {
@@ -35,10 +30,6 @@ public class TheLoai extends AppCompatActivity {
                 finish();
             }
         });
-
-
-
-
     }
 
     private void Anhxa() {

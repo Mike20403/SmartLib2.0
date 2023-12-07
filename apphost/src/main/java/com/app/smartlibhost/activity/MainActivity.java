@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -29,11 +30,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import com.andremion.counterfab.CounterFab;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
 import com.app.smartlibhost.Fragment.PopupDialogFragment;
 import com.app.smartlibhost.Fragment.fragment_scrollview;
 import com.app.smartlibhost.Fragment.fragment_tracuu;
@@ -44,12 +40,13 @@ import com.app.smartlibhost.adapter.Users_adapter;
 import com.app.smartlibhost.model.Menu_main;
 import com.app.smartlibhost.model.Users;
 import com.app.smartlibhost.ultil.CheckConnection;
-import com.app.smartlibhost.ultil.server;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -58,9 +55,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.squareup.picasso.Picasso;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import java.io.InputStream;
 import java.net.URL;
 import java.security.SecureRandom;
@@ -70,7 +64,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -87,35 +80,32 @@ import static com.app.smartlibhost.activity.BorrowActivity.users_adapter;
 
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
-
+    public static String ten_menu ="test";
+    public static String img_menu ="";
+    public static int id_menu =0;
+    private final int[] COLORS = {0xFF2196F3, 0xFF00BCD4, 0xFF795548, 0xFF5B4947, 0xFFF57C00};
+    public static String email,name;
     NavigationController mNavigationController;
     ListView lvmain;
     NavigationView navigationView;
     Toolbar toolbarmain;
     DrawerLayout drawerLayout;
-    Toolbar toolbar;
     PageNavigationView tabLayout;
     ViewPager viewPager;
     ArrayList<Menu_main> mang_menu;
     Menuadapter menuadapter;
     ImageView avatar;
-    public static String email,name;
     TextView emaill,namee;
     public static ArrayList<Users> manguser;
-    ArrayList<Users> usersArrayList;
-    public static String ten_menu ="test";
-    public static String img_menu ="";
-    public static int id_menu =0;
-    private final int[] COLORS = {0xFF2196F3, 0xFF00BCD4, 0xFF795548, 0xFF5B4947, 0xFFF57C00};
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    GoogleSignInClient gsc;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     String UId;
-    String TAG = "RealtimeDB";
     String PhotoURL = FirebaseStorage.getInstance().getReference("UserImg/default.png").getPath();
     FirebaseDatabase mdatabase = FirebaseDatabase.getInstance();
     DatabaseReference mdata = mdatabase.getReference();
     CounterFab fab;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,21 +116,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
             ActionBar();
             GetMenu();
-//            GetFBData();
-//            AddUserToFirebase();
-//            SetInfo();
             SetUpViewPager();
         } else {
-
             CheckConnection.ShowToast_short(getApplicationContext(), "Bạn hãy kiểm tra lại kết nối");
             finish();
-
         }
         ListViewOnClick();
-
-
-
-
     }
 
 
@@ -200,6 +181,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Menu_main menu = mang_menu.get(position);
+                Log.d("DEBUG",menu.toString());
+
 
                 if (menu.getId() == 6) {
                     showAlertDialog();
@@ -207,18 +190,20 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 if (menu.getId() == 4) {
                     startActivity(new Intent(MainActivity.this, AddingBookActiviy.class));
                 }
-                if (menu.getId() == 3) {
+                if (menu.getId() == 2) {
                     startActivity(new Intent(MainActivity.this, BorrowActivity.class));
                 }
                 if (menu.getId() == 5) {
                     startActivity(new Intent(MainActivity.this, LineGraphActivity.class));
                 }
-                if (menu.getId() == 2) {
+                if (menu.getId() == 3){
+                    startActivity(new Intent(MainActivity.this,MemberCardActivity.class));
+
+                }
+                if (menu.getId() == 1) {
                     startActivity(new Intent(MainActivity.this, TheLoai.class));
                 }
-                if (menu.getId() == 1){
-                    startActivity(new Intent(MainActivity.this, MemberCardActivity.class));
-                }
+
             }
         });
     }
@@ -353,8 +338,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                finish();
-              // startActivity(new Intent(MainActivity.this,LoginActivity.class));
                 dialogInterface.dismiss();
+                mAuth.signOut();
+
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
             }
         });
         AlertDialog alertDialog = builder.create();
@@ -381,8 +369,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 .placeholder(R.drawable.boy)
                 .error(R.drawable.boy)
                 .into(avatar);
-
-
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -445,34 +431,44 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     private void GetMenu() {
         mang_menu.clear();
-
-        final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(server.menu_url, new Response.Listener<JSONArray>() {
+        mdata.child("Menu").addChildEventListener(new ChildEventListener() {
             @Override
-            public void onResponse(JSONArray response) {
-                if (response != null) {
-                    for (int i=0; i<response.length();i++){
-                        try {
-                            JSONObject jsonObject = response.getJSONObject(i);
-                            id_menu = jsonObject.getInt("menu_id");
-                            ten_menu = jsonObject.getString("menu_name");
-                            img_menu = jsonObject.getString("menu_img");
-                            mang_menu.add(new Menu_main(id_menu,ten_menu,img_menu));
-                            menuadapter.notifyDataSetChanged();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                // Get the values from the DataSnapshot
+                int id = snapshot.child("id").getValue(Integer.class);
+                String ten_menu = snapshot.child("name").getValue(String.class);
+                String img_menu = snapshot.child("img").getValue(String.class);
+
+                // Create a Menu_main object and add it to the mang_menu list
+                Menu_main menu = new Menu_main(id, ten_menu, img_menu);
+                mang_menu.add(menu);
+
+                // Notify the adapter that the data set has changed
+                menuadapter.notifyDataSetChanged();
+                Log.d("DEBUG",snapshot.toString());
 
             }
-        }, new Response.ErrorListener() {
+
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-        requestQueue.add(jsonArrayRequest);
 
     }
 
@@ -534,7 +530,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         viewPager= (ViewPager) findViewById(R.id.viewpager);
         manguser = new ArrayList<>();
         users_adapter = new Users_adapter(this,R.layout.dong_user,manguser);
-        // OverScrollDecoratorHelper.setUpOverScroll(lvmain);
         new VerticalOverScrollBounceEffectDecorator(new AbsListViewOverScrollDecorAdapter(lvmain));
 
 
@@ -556,8 +551,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         @Override
         protected void onPostExecute(Bitmap result) {
             if (result != null) {
-                // avatar.getLayoutParams().width = (getResources().getDisplayMetrics().widthPixels / 100) * 24;
-                // avatar.setImageBitmap(result);
+
             }
         }
     }
@@ -566,7 +560,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     @Override
     protected void onStart() {
-        //recreate();
         super.onStart();
     }
 }

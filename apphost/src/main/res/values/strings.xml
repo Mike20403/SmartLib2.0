@@ -19,11 +19,24 @@
     <string name="action_refresh">Reload</string>
     <string name="title_activity_the_loai">TheLoai</string>
     <string name="loading">Loading…</string>
-    <string name="facebook_application_id" translatable="false">459407771522793</string>
-    <string name="facebook_login_protocol_scheme" translatable="false">fb459407771522793</string>
+    <string name="facebook_app_id">333524766091622</string>
+    <string name="facebook_application_id">333524766091622</string>
 
+    <string name="fb_login_protocol_scheme">fb333524766091622</string>
+    <string name="facebook_client_token">aa005ae1e18f00638a2ac48b6fd51efa</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+<!--    Categories type -->
+    <string name="title_sach_thieunhi">Sách Thiếu Nhi</string>
+    <string name="title_giaotrinh">Giáo trình</string>
+    <string name="title_chinhtri">Chính trị - Pháp Luật</string>
+    <string name="title_vanhoc">Văn Hóa - Xã Hội - Lịch Sử</string>
+    <string name="title_truyentieuthuyet">Truyện - Tiểu thuyết</string>
+    <string name="title_khoahoc">Khoa học - Kinh tế</string>
+    <string name="title_vanhocnghethuat">Văn học - Nghệ thuật</string>
+    <string name="title_tamlinh">Tâm linh - Tôn giáo</string>
+    <string name="title_doisong">Đời sống</string>
+
 
     <string name="sort_ascending">Sort Ascending</string>
     <string name="sort_descending">Sort Descending</string>
