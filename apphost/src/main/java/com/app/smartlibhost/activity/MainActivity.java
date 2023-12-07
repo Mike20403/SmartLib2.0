@@ -40,6 +40,7 @@ import com.app.smartlibhost.adapter.Users_adapter;
 import com.app.smartlibhost.model.Menu_main;
 import com.app.smartlibhost.model.Users;
 import com.app.smartlibhost.ultil.CheckConnection;
+import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -340,6 +341,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                finish();
                 dialogInterface.dismiss();
                 mAuth.signOut();
+                LoginManager.getInstance().logOut();
 
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
