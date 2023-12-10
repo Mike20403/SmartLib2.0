@@ -1,6 +1,8 @@
 package com.app.smartlibhost.activity;
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -22,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -78,6 +81,8 @@ import me.everything.android.ui.overscroll.adapters.AbsListViewOverScrollDecorAd
 import me.everything.android.ui.overscroll.adapters.ViewPagerOverScrollDecorAdapter;
 import me.majiajie.pagerbottomtabstrip.NavigationController;
 import me.majiajie.pagerbottomtabstrip.PageNavigationView;
+import nl.siegmann.epublib.epub.Main;
+
 import static com.app.smartlibhost.activity.BorrowActivity.users_adapter;
 
 
@@ -124,8 +129,23 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         }
         ListViewOnClick();
         SetInfo();
+        RequestPermissions();
     }
 
+    private void RequestPermissions() {
+        int permission = ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    MainActivity.this,
+                    new String[] {
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    },
+                    1
+            );
+        }
+    }
 
 
     private void AddUserToFirebase() {
@@ -365,7 +385,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private void SetInfo() {
         FirebaseUser user = mAuth.getCurrentUser();
         Log.d("Test",user.getUid());
-        namee.setText(user.getDisplayName());
+        if (user.getDisplayName() != null) {
+            namee.setText(user.getDisplayName());
+        }
         emaill.setText(user.getEmail());
         PhotoURL = String.valueOf(user.getPhotoUrl());
         String photoUrl = PhotoURL;
