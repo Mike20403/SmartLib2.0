@@ -18,10 +18,6 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-
-import com.facebook.login.Login;
-import com.facebook.login.LoginClient;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -38,14 +34,14 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import java.util.Arrays;
+
 
 
 public class LoginActivity extends AppCompatActivity {
     private Button loginBtn;
     private EditText accEmail, accPassword;
     private TextView forgotPassword, registerNow;
-    private SignInButton GoogleLogin;
+    private SignInButton googleBtn;
     public static final String TAG = "GoogleSignInActivity";
     private static final String EMAIL = "email";
     public static final int RC_SIGN_IN = 9001;
@@ -53,7 +49,6 @@ public class LoginActivity extends AppCompatActivity {
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
     CallbackManager mCallbackManager;
-    private ImageView googleBtn;
     LoginButton fbBtn;
 
     @Override
@@ -90,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Initialize Google Sign In
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(com.firebase.ui.auth.R.string.default_web_client_id))
+                .requestIdToken(getString(R.string.web_client_id))
                 .requestEmail()
                 .build();
         gsc = GoogleSignIn.getClient(LoginActivity.this, gso);
