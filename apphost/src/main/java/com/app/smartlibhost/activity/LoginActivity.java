@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
         gsc.signOut();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null) {
+        if(currentUser != null && currentUser.isEmailVerified()) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();

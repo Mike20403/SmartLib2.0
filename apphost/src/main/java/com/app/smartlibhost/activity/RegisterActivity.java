@@ -81,7 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     if (currentUser != null){
                                         currentUser.sendEmailVerification();
                                         Toast.makeText(RegisterActivity.this, "Link xác thực đã được gửi đến email của bạn", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(getApplicationContext(), Login.class);
+                                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                                         startActivity(intent);
                                         finish();
                                     }
