@@ -40,6 +40,7 @@ import com.app.smartlibhost.adapter.Users_adapter;
 import com.app.smartlibhost.model.Menu_main;
 import com.app.smartlibhost.model.Users;
 import com.app.smartlibhost.ultil.CheckConnection;
+import com.bumptech.glide.Glide;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.common.ConnectionResult;
@@ -96,9 +97,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     ArrayList<Menu_main> mang_menu;
     Menuadapter menuadapter;
     ImageView avatar;
-    TextView emaill,namee;
+    TextView emaill, namee;
     public static ArrayList<Users> manguser;
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     GoogleSignInClient gsc;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             finish();
         }
         ListViewOnClick();
+        SetInfo();
     }
 
 
@@ -130,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private void AddUserToFirebase() {
        UId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         final Map<String, Object> userr = new HashMap<>();
+        FirebaseUser user = mAuth.getCurrentUser();
         userr.put("Name", user.getDisplayName());
         userr.put("Email", user.getEmail());
         userr.put("PhoneNumber", user.getPhoneNumber());
@@ -361,10 +363,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     private void SetInfo() {
-
+        FirebaseUser user = mAuth.getCurrentUser();
         Log.d("Test",user.getUid());
-        namee.setText(user.getDisplayName( ));
+        namee.setText(user.getDisplayName());
         emaill.setText(user.getEmail());
+        PhotoURL = String.valueOf(user.getPhotoUrl());
         String photoUrl = PhotoURL;
         photoUrl = photoUrl + "?height=500";
         Picasso.get().load(photoUrl)
@@ -521,9 +524,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         toolbarmain = findViewById(R.id.toolbarmain);
         lvmain = (ListView) findViewById(R.id.lvmain);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
-        emaill = (TextView) findViewById(R.id.activity_main_tv_email);
-        namee =(TextView) findViewById(R.id.name_user);
-        avatar = (ImageView) findViewById(R.id.avatar_user);
+        emaill = findViewById(R.id.activity_main_tv_email);
+        namee = findViewById(R.id.name_user);
+        avatar = findViewById(R.id.avatar_user);
         mang_menu = new ArrayList<>();
         menuadapter = new Menuadapter(mang_menu,R.layout.dong_lvmenu,getApplicationContext());
         menuadapter.notifyDataSetChanged();
@@ -533,8 +536,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         manguser = new ArrayList<>();
         users_adapter = new Users_adapter(this,R.layout.dong_user,manguser);
         new VerticalOverScrollBounceEffectDecorator(new AbsListViewOverScrollDecorAdapter(lvmain));
-
-
     }
 
 

@@ -134,6 +134,7 @@
                         android:id="@+id/avatar_user"
                         android:layout_width="75dp"
                         android:layout_height="75dp"
+                        android:scaleType="centerCrop"
                         app:srcCompat="@drawable/boy" />
 
                     <TextView
@@ -142,21 +143,16 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:paddingTop="10dp"
-
-                        android:text="User Name"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textColor="#FFFFFF"
-                        android:textSize="20dp" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/activity_main_tv_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
-
-                        android:text="username123.books@gmail.com"
                         android:textColor="#FFFFFF"
-                        android:textSize="10dp" />
+                        android:textSize="10sp" />
 
 
                 </LinearLayout>
