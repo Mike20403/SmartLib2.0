@@ -27,7 +27,6 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import java.io.ByteArrayOutputStream;
 
 public class QRCodeActivity extends AppCompatActivity {
-
     String qrdata;
     androidx.appcompat.widget.Toolbar tb;
     String key;
@@ -66,9 +65,6 @@ public class QRCodeActivity extends AppCompatActivity {
         qrdata= intent.getStringExtra("QRCode");
         key = intent.getStringExtra("key");
         mref.child(key).child("key").setValue(key);
-
-
-
     }
 
     private void CallQRCodeAPI() {
@@ -109,16 +105,10 @@ public class QRCodeActivity extends AppCompatActivity {
                         public void onSuccess(Uri uri) {
                             String DowloadURL = String.valueOf(uri);
                             mref.child(key).child("QRCode").setValue(DowloadURL);
-
-
                         }
                     });
-
-
                 }
             });
-
-
         } catch (WriterException e) {
             e.printStackTrace();
         }

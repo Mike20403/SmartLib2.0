@@ -39,9 +39,6 @@ public class fragment_addinfor2 extends Fragment {
     static String value;
     static Bitmap bitmap1,bitmap2;
 
-
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,9 +58,6 @@ public class fragment_addinfor2 extends Fragment {
 
             }
         });
-
-
-
         return view;
     }
     private void scanAction(@NonNull UISettings activitySettings, @Nullable Intent helpIntent) {

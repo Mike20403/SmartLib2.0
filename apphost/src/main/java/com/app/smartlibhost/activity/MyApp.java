@@ -35,8 +35,6 @@ public abstract class MyApp extends Application {
             MicroblinkSDK.setLicenseFile("lisence.mblic", this);
             MicroblinkSDK.setIntentDataTransferMode(IntentDataTransferMode.PERSISTED_OPTIMISED);
         }
-
-
         // in case of problems with the SDK (crashes or ANRs, uncomment following line to enable
         // verbose logging that can help developers track down the problem)
         //Log.setLogLevel(Log.LogLevel.LOG_VERBOSE);
