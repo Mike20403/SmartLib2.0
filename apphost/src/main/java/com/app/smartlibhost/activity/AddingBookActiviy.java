@@ -35,9 +35,6 @@ import me.everything.android.ui.overscroll.adapters.ViewPagerOverScrollDecorAdap
 import me.majiajie.pagerbottomtabstrip.NavigationController;
 import me.majiajie.pagerbottomtabstrip.PageNavigationView;
 
-
-
-
 public class AddingBookActiviy extends AppCompatActivity {
     ListView listView;
     Button addbt;
