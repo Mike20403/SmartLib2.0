@@ -24,7 +24,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.andremion.counterfab.CounterFab;
 import com.app.smartlibhost.R;
 import com.app.smartlibhost.model.Order;
@@ -49,13 +48,12 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-
-public class CartActivity extends AppCompatActivity  {
- RecyclerView cartrv;
+public class CartActivity extends AppCompatActivity {
+    RecyclerView cartrv;
     FirebaseRecyclerOptions<SachFB> options;
-    FirebaseRecyclerAdapter<SachFB,BookViewHolder> adapter;
+    FirebaseRecyclerAdapter<SachFB, BookViewHolder> adapter;
     ArrayList<SachFB> arraysach = new ArrayList<>();
-    String  UId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    String UId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mdata = database.getReference().child("Users").child(UId).child("Cart");
     DatabaseReference admdata = database.getReference().child("Admin").child("Queue");
@@ -73,13 +71,8 @@ public class CartActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_cart);
         Anhxa();
         ActionToolbar();
-
-            SetupRV();
-
-        //startActivity(new Intent(getApplicationContext(), EpubParseActivity.class).putExtra("paths","/storage/sdcard/Download/de_men_phieu_luu_ky__to_hoai.epub"));
-
-
-        }
+        SetupRV();
+    }
 
     private void movechild(final DatabaseReference fromPath, final DatabaseReference toPath) {
         fromPath.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -87,7 +80,7 @@ public class CartActivity extends AppCompatActivity  {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<SachFB> arrayList = new ArrayList<>();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    Log.d("Dataa",String.valueOf(ds));
+                    Log.d("Dataa", String.valueOf(ds));
                     SachFB sach = ds.getValue(SachFB.class);
                     arrayList.add(sach);
                 }
@@ -95,8 +88,8 @@ public class CartActivity extends AppCompatActivity  {
                 Map mapp = new HashMap();
 
                 map.put("timestamp", ServerValue.TIMESTAMP);
-                mapp.put("timestamp",ServerValue.TIMESTAMP);
-                Order morder = new Order(arrayList, Calendar.getInstance().getTimeInMillis(),UId,"Đã khởi tạo",null,key);
+                mapp.put("timestamp", ServerValue.TIMESTAMP);
+                Order morder = new Order(arrayList, Calendar.getInstance().getTimeInMillis(), UId, "Đã khởi tạo", null, key);
 
                 toPath.child(key).setValue(morder, new DatabaseReference.CompletionListener() {
                     @Override
@@ -105,88 +98,66 @@ public class CartActivity extends AppCompatActivity  {
                             System.out.println("Copy failed");
                         } else {
                             System.out.println("Success");
-
                         }
                     }
                 });
 
-
-
                 dataSnapshot.getRef().removeValue();
-
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
     }
 
     private void GetData() {
         arraysach.clear();
-        Log.d("Uid",UId);
+        Log.d("Uid", UId);
         mdata.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     SachFB sachFB = ds.getValue(SachFB.class);
-                    Log.d("Dataa",sachFB.toString());
+                    Log.d("Dataa", sachFB.toString());
                     arraysach.add(sachFB);
-
                 }
-                if (arraysach.size() == 0){
+                if (arraysach.size() == 0) {
                     emptyimg.setVisibility(View.VISIBLE);
                     emptytxt.setVisibility(View.VISIBLE);
                 } else {
                     emptytxt.setVisibility(View.INVISIBLE);
                     emptyimg.setVisibility(View.INVISIBLE);
                 }
-
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
-
-
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         GetData();
-
-
-
     }
 
     private void Anhxa() {
-        emptyimg = (ImageView) findViewById(R.id.emptyimg);
-        emptytxt = (TextView) findViewById(R.id.emptytext);
-
-        borrownow = (Button) findViewById(R.id.borrownow);
-        tb = (Toolbar) findViewById(R.id.toolbar);
+        emptyimg = findViewById(R.id.emptyimg);
+        emptytxt = findViewById(R.id.emptytext);
+        borrownow = findViewById(R.id.borrownow);
+        tb = findViewById(R.id.toolbar);
         borrownow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 GetData();
                 showAlertDialog();
             }
         });
-
-
-
     }
 
     private void ActionToolbar() {
-
-
         setSupportActionBar(tb);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         tb.setNavigationOnClickListener(new View.OnClickListener() {
@@ -195,24 +166,20 @@ public class CartActivity extends AppCompatActivity  {
                 finish();
             }
         });
-
     }
 
-    private void SetupRV () {
-        cartrv = (RecyclerView) findViewById(R.id.cartrv);
+    private void SetupRV() {
+        cartrv = findViewById(R.id.cartrv);
         options = new FirebaseRecyclerOptions.Builder<SachFB>().setQuery(mdata, SachFB.class).build();
         adapter = new FirebaseRecyclerAdapter<SachFB, BookViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull BookViewHolder holder, int position, @NonNull SachFB model) {
-
                 holder.tensach.setText(model.getTensach());
                 Picasso.get().load(model.getImg_sach())
                         .placeholder(R.drawable.no_img)
                         .error(R.drawable.no_img)
                         .into(holder.img_sach);
                 holder.tacgia.setText("Tác giả: " + model.getTentacgia());
-               // holder.slconlai.setText("SL: :" + model.getSoluong() + " Còn lại: " + model.getConlai());
-
             }
 
             @NonNull
@@ -222,12 +189,13 @@ public class CartActivity extends AppCompatActivity  {
                 return new BookViewHolder(view);
             }
         };
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),1);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 1);
         cartrv.setLayoutManager(gridLayoutManager);
         adapter.startListening();
         cartrv.setAdapter(adapter);
     }
-    public void showAlertDialog(){
+
+    public void showAlertDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Smartlib");
         builder.setMessage("Bạn có chắc muốn mượn không?");
@@ -235,7 +203,6 @@ public class CartActivity extends AppCompatActivity  {
         builder.setPositiveButton("Hủy", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
             }
         });
         builder.setNegativeButton("Chắc chắn", new DialogInterface.OnClickListener() {
@@ -243,41 +210,28 @@ public class CartActivity extends AppCompatActivity  {
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (arraysach.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Túi của bạn đang trống, vui lòng chọn thêm sách !", Toast.LENGTH_SHORT).show();
-
                 } else {
-                    String qrdata ="";
-                    for (int j = 0 ; j<arraysach.size(); j++){
-                        if (j!= arraysach.size()-1){
-                            qrdata = qrdata +arraysach.get(j).getBarcode()+"\n";
-                        }else {  qrdata += arraysach.get(j).getBarcode();}
-
-
+                    String qrdata = "";
+                    for (int j = 0; j < arraysach.size(); j++) {
+                        if (j != arraysach.size() - 1) {
+                            qrdata = qrdata + arraysach.get(j).getBarcode() + "\n";
+                        } else {
+                            qrdata += arraysach.get(j).getBarcode();
+                        }
                     }
-                    Log.d("Tempp",qrdata);
-
-
+                    Log.d("Tempp", qrdata);
 
                     key = admdata.push().getKey();
-                    movechild(mdata,admdata);
+                    movechild(mdata, admdata);
                     showQRDialog(key);
-
-
                     dialogInterface.dismiss();
-
                 }
-
-
-
-
-
-
             }
 
             private void showQRDialog(String key) {
                 Dialog dialog = new Dialog(CartActivity.this);
                 dialog.setContentView(R.layout.qrdialog);
-
-               qrcode = (ImageView) dialog.findViewById(R.id.qr_img);
+                qrcode = dialog.findViewById(R.id.qr_img);
                 CallQRCode(key);
                 dialog.setCanceledOnTouchOutside(true);
                 dialog.show();
@@ -287,20 +241,13 @@ public class CartActivity extends AppCompatActivity  {
                         GetData();
                     }
                 });
-
             }
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-
     }
-    private void CallQRCode(String data) {
-        /*Picasso.with(getApplicationContext()).load("https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+qrdata)
-                .placeholder(R.drawable.no_img)
-                .error(R.drawable.no_img)
-                .into(qrcode);
 
-*/
+    private void CallQRCode(String data) {
         QRCodeWriter writer = new QRCodeWriter();
         try {
             BitMatrix bitMatrix = writer.encode(data, BarcodeFormat.QR_CODE, 512, 512);
@@ -312,16 +259,11 @@ public class CartActivity extends AppCompatActivity  {
                     bmp.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
                 }
             }
-
             qrcode.setImageBitmap(bmp);
-
-
-
         } catch (WriterException e) {
             e.printStackTrace();
         }
     }
-
 
     @Override
     protected void onStart() {
@@ -333,7 +275,7 @@ public class CartActivity extends AppCompatActivity  {
 
     @Override
     protected void onStop() {
-        if (adapter != null ){
+        if (adapter != null) {
             adapter.stopListening();
         }
         super.onStop();
@@ -341,20 +283,16 @@ public class CartActivity extends AppCompatActivity  {
 
     public class BookViewHolder extends RecyclerView.ViewHolder {
         public ImageView img_sach;
-        public TextView tensach, tacgia, slconlai;
-        public ImageButton delete;
+
+        public TextView tensach, tacgia;
 
         public BookViewHolder(final View itemView) {
             super(itemView);
-
-            img_sach = (ImageView) itemView.findViewById(R.id.imgsach);
-            tensach = (TextView) itemView.findViewById(R.id.tensach);
-            tacgia = (TextView) itemView.findViewById(R.id.tacgia);
-            Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.item_animation_from_bottom);
+            img_sach = itemView.findViewById(R.id.imgsach);
+            tensach = itemView.findViewById(R.id.tensach);
+            tacgia = itemView.findViewById(R.id.tacgia);
+            Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.item_animation_from_bottom);
             itemView.startAnimation(animation);
-
         }
     }
-
-    }
-
+}

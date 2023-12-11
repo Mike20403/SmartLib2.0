@@ -127,7 +127,6 @@ public class BookDetailsActivity extends AppCompatActivity {
             }
         });
 
-
         mdata.child("Users").child((FirebaseAuth.getInstance().getUid())).child("Cart").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -140,9 +139,7 @@ public class BookDetailsActivity extends AppCompatActivity {
 
             }
         });
-
     }
-
 
     private void FiveStarsRating() {
         final RotationRatingBar rotationRatingBar = (RotationRatingBar) findViewById(R.id.rotationratingbar);
@@ -178,7 +175,6 @@ public class BookDetailsActivity extends AppCompatActivity {
 
         ratingReviews.createRatingBars(100, BarLabels.STYPE3, colors, raters);
     }
-
 
     private void loadanim() {
         mWebViewComments.clearCache(true);
