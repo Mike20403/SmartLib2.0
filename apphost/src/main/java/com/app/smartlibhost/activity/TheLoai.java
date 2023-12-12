@@ -10,7 +10,7 @@ import android.view.View;
 import com.app.smartlibhost.R;
 
 public class TheLoai extends AppCompatActivity {
-    CardView cv1,cv2,cv3,cv4,cv5,cv6,cv7,cv8,cv9;
+    CardView cv1, cv2, cv3, cv4, cv5, cv6, cv7, cv8, cv9;
     Toolbar theloai_toolbar;
 
     @Override
@@ -20,7 +20,7 @@ public class TheLoai extends AppCompatActivity {
         Anhxa();
         ActionToolbar();
     }
-   
+
     private void ActionToolbar() {
         setSupportActionBar(theloai_toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -33,17 +33,15 @@ public class TheLoai extends AppCompatActivity {
     }
 
     private void Anhxa() {
-         theloai_toolbar = findViewById(R.id.toolbar);
-        cv1 = (CardView) findViewById(R.id.cardView1);
-        cv2 = (CardView) findViewById(R.id.cardView2);
-        cv3 = (CardView) findViewById(R.id.cardView3);
-        cv4 = (CardView) findViewById(R.id.cardView4);
-        cv5 = (CardView) findViewById(R.id.cardView5);
-        cv6 = (CardView) findViewById(R.id.cardView6);
-        cv7 = (CardView) findViewById(R.id.cardView7);
-        cv8 = (CardView) findViewById(R.id.cardView8);
-        cv9 = (CardView) findViewById(R.id.cardView9);
-
+        theloai_toolbar = findViewById(R.id.toolbar);
+        cv1 = findViewById(R.id.cardView1);
+        cv2 = findViewById(R.id.cardView2);
+        cv3 = findViewById(R.id.cardView3);
+        cv4 = findViewById(R.id.cardView4);
+        cv5 = findViewById(R.id.cardView5);
+        cv6 = findViewById(R.id.cardView6);
+        cv7 = findViewById(R.id.cardView7);
+        cv8 = findViewById(R.id.cardView8);
+        cv9 = findViewById(R.id.cardView9);
     }
-
 }

@@ -4,9 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-
 import android.os.Bundle;
-
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -67,7 +65,6 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                 String code = editText.getText().toString().trim();
 
                 if (code.isEmpty() || code.length() < 6) {
-
                     editText.setError("Enter code...");
                     editText.requestFocus();
                     return;
@@ -80,7 +77,6 @@ public class VerifyPhoneActivity extends AppCompatActivity {
 
     private void verifyCode(String code) {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
-       // signInWithCredential(credential);
         mAuth.getCurrentUser().linkWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -88,15 +84,11 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d("123", "linkWithCredential:success");
                             FirebaseUser user = task.getResult().getUser();
-
                         } else {
                             Log.w("123", "linkWithCredential:failure", task.getException());
                             Toast.makeText(VerifyPhoneActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-
                         }
-
-                        // ...
                     }
                 });
     }
@@ -107,12 +99,9 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
                             Intent intent = new Intent(VerifyPhoneActivity.this, ProfileActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
                             startActivity(intent);
-
                         } else {
                             Toast.makeText(VerifyPhoneActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
@@ -130,7 +119,6 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                 (Activity) TaskExecutors.MAIN_THREAD,
                 mCallBack
         );
-
         progressBar.setVisibility(View.GONE);
     }
 

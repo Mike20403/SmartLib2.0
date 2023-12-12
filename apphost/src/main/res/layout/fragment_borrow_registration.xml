@@ -1,0 +1,33 @@
+<!-- fragment_borrow_registration.xml -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextBookTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Book Title" />
+
+    <EditText
+        android:id="@+id/editTextBorrowerName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Borrower Name" />
+
+    <Button
+        android:id="@+id/buttonBorrow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Borrow" />
+
+    <Button
+        android:id="@+id/buttonReturn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Return" />
+
+</LinearLayout>
