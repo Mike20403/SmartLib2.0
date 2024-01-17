@@ -9,27 +9,10 @@ import android.net.Uri;
 import android.net.http.SslError;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-
-import com.andremion.counterfab.CounterFab;
-import com.app.smartlibhost.epubparser.EpubParseActivity;
-import com.app.smartlibhost.model.SachFB;
-import com.folioreader.FolioReader;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-
-import androidx.annotation.NonNull;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.widget.NestedScrollView;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import androidx.appcompat.widget.Toolbar;
-
 import android.os.PowerManager;
 import android.util.Log;
 import android.util.Pair;
@@ -49,8 +32,22 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.app.smartlibhost.R;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.widget.NestedScrollView;
+
+import com.andremion.counterfab.CounterFab;
+import com.app.smartlibhost.epubparser.EpubParseActivity;
+import com.app.smartlibhost.model.SachFB;
+import com.folioreader.FolioReader;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -81,42 +78,39 @@ import nl.siegmann.epublib.domain.Book;
 import nl.siegmann.epublib.epub.EpubReader;
 
 public class BookDetailsActivity extends AppCompatActivity {
-    ImageView img_sach,img_toolbar;
-    TextView tensach,tacgia,nxb,slcl,mota,theloai,ngonngu,barcode;
-    Toolbar detail_toolbar;
-    CollapsingToolbarLayout collapsingToolbarLayout;
-    CoordinatorLayout coordinatorLayout;
-    AppBarLayout appBarLayout;
-    WebView mWebViewComments;
-    NestedScrollView nestedScrollView;
+    private ImageView img_sach, img_toolbar;
+    private TextView tensach, tacgia, nxb, slcl, mota, theloai, ngonngu, barcode;
+    private Toolbar detail_toolbar;
+    private CollapsingToolbarLayout collapsingToolbarLayout;
+    private CoordinatorLayout coordinatorLayout;
+    private AppBarLayout appBarLayout;
+    private WebView mWebViewComments;
+    private NestedScrollView nestedScrollView;
     private WebView mWebviewPop;
     private String postUrl;
-    boolean isLoading;
+    private boolean isLoading;
     private static final int NUMBER_OF_COMMENTS = 5;
     private ProgressBar progressBar;
     private FrameLayout mContainer;
-    private static String TAG = BookDetailsActivity.class.getSimpleName();
-    String id_sach ;
-    Button readnow,borrownow;
-    android.app.ProgressDialog mProgressDialog;
-    SachFB sach;
-    FirebaseDatabase mdatabase = FirebaseDatabase.getInstance();
-    DatabaseReference mdata = mdatabase.getReference();
-    CounterFab fab;
-
-    FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageReference = storage.getReferenceFromUrl("gs://smartlib-c11dc.appspot.com/Ebooks");
-
+    private static final String TAG = BookDetailsActivity.class.getSimpleName();
+    private String id_sach;
+    private Button readnow, borrownow;
+    private android.app.ProgressDialog mProgressDialog;
+    private SachFB sach;
+    private FirebaseDatabase mdatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference mdata = mdatabase.getReference();
+    private CounterFab fab;
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
+    private StorageReference storageReference = storage.getReferenceFromUrl("gs://smartlib-c11dc.appspot.com/Ebooks");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_book_details_);
         Anhxa();
         ActionToolbar();
         GetInformation();
-        postUrl = "http://smartlib.keyshop.vn/"+id_sach;
+        postUrl = "http://smartlib.keyshop.vn/" + id_sach;
         setLoading(true);
         loadComments();
         loadanim();
